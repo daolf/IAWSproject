@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 *.db
 # Created by .ignore support plugin (hsz.mobi)
 ### Java template
@@ -74,3 +75,6 @@ release.properties
 
 
 
+=======
+*.db
+>>>>>>> 439a0e7... #2 ADD sqlite database init script
