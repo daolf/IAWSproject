@@ -63,9 +63,9 @@ INSERT INTO Localisation("idLocalisation", "intituleLocalisation") VALUES (3, "V
 INSERT INTO Localisation("idLocalisation", "intituleLocalisation") VALUES (4, "VOST");
 INSERT INTO Localisation("idLocalisation", "intituleLocalisation") VALUES (5, "VOSTPKSTAN");
 
-INSERT INTO Localisation("idTechno", "intituleTechno") VALUES (1, "3D");
-INSERT INTO Localisation("idTechno", "intituleTechno") VALUES (2, "IMAX");
-INSERT INTO Localisation("idTechno", "intituleTechno") VALUES (3, "LEOTECHNOLOGIES");
+INSERT INTO Techno("idTechno", "intituleTechno") VALUES (1, "3D");
+INSERT INTO Techno("idTechno", "intituleTechno") VALUES (2, "IMAX");
+INSERT INTO Techno("idTechno", "intituleTechno") VALUES (3, "LEOTECHNOLOGIES");
 
 -- James bond
 INSERT INTO RoomMovieAssociation("idRoom", "idMovie", "nbPlaceUsed", "date", "idLocalisation", "idTechno") 
