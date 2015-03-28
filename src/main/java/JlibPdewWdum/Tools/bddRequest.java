@@ -27,9 +27,11 @@ public class bddRequest {
             c = DriverManager.getConnection(dbUrl);
             stmt = c.createStatement();
             rs = stmt.executeQuery(req);
-            rs.close();
-            stmt.close();
-            c.close();
+
+            // can't get metadata ouf of a closed resultSet
+            //rs.close();
+            //stmt.close();
+            //c.close();
 
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -40,9 +42,4 @@ public class bddRequest {
         return rs;
     }
 
-
-    public static void main( String args[] )
-    {
-        sendRequest("SELECT * FROM TECHNO");
-    }
 }
