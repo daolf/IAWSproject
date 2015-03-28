@@ -20,10 +20,10 @@ public class Film {
 
             //y not defined
             if (y == -1) {
-                return OmdbClient.getFromTitle(t);
+                return OmdbClient.get(t);
             }
             else {
-                return OmdbClient.getFromTitleYear(y, t);
+                return OmdbClient.get(y, t);
             }
     }
 }
