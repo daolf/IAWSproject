@@ -18,7 +18,7 @@ public class OmdbClient {
     //TODO Change return type to movie when movie class fully implemented
     public static final String getFromYear(int year){
 
-        MultivaluedMap queryParams = new MultivaluedMapImpl();
+        MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
         queryParams.add("s", "");
         queryParams.add("y", "2000");
         queryParams.add("r", "xml");
@@ -29,7 +29,7 @@ public class OmdbClient {
     //TODO Change return type to movie when movie class fully implemented
 
     public static final String getFromTitle(String title){
-        MultivaluedMap queryParams = new MultivaluedMapImpl();
+        MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
         queryParams.add("t", title);
         queryParams.add("r", "xml");
         String s = res.queryParams(queryParams).get(String.class);
@@ -38,12 +38,17 @@ public class OmdbClient {
 
     //TODO Change return type to movie when movie class fully implemented
     public static final String getFromTitleYear(int year,String title){
-        MultivaluedMap queryParams = new MultivaluedMapImpl();
+        MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
         queryParams.add("t", title);
         queryParams.add("y",Integer.toString(year));
         queryParams.add("r", "xml");
         String s = res.queryParams(queryParams).get(String.class);
         return s;
+    }
+
+    public static void main (String[] args){
+        System.out.println(getFromTitle("harry"));
+        System.out.println(getFromTitleYear(1992,"batman"));
     }
 
 }

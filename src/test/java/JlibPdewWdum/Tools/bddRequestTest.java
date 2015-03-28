@@ -5,11 +5,11 @@ import junit.framework.TestCase;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 
-public class bddRequestTest extends TestCase {
+public class BddRequestTest extends TestCase {
 
     public void testSendRequest() throws Exception {
         System.out.print("Test avec Select * from TECHNO\n");
-        ResultSet rs = bddRequest.sendRequest("Select * from TECHNO");
+        ResultSet rs = BddRequest.sendRequest("Select * from TECHNO");
         ResultSetMetaData rm = rs.getMetaData();
         assertEquals("Nb colonne",2,rm.getColumnCount());
         assertEquals("Nom colonne 1","idTechno",rm.getColumnName(1));

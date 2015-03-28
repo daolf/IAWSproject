@@ -9,7 +9,7 @@ import java.sql.Statement;
 /**
  * Created by daolf on 28/03/15.
  */
-public class bddRequest {
+public class BddRequest {
 
     private static final String sJdbc = "jdbc:sqlite";
     //TODO a changer en fonction de votre machine
