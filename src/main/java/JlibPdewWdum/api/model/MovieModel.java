@@ -8,19 +8,19 @@ public class MovieModel {
     private String _title;
     private int _year;
 
-    public MovieModel(String _IdOmdb, String _title, int _year) {
-        this._IdOmdb = _IdOmdb;
-        this._title = _title;
-        this._year = _year;
+    public MovieModel(String IdOmdb, String title, int year) {
+        this._IdOmdb = IdOmdb;
+        this._title = title;
+        this._year = year;
     }
 
-    public MovieModel(String _IdOmdb, String _title) {
-        this._IdOmdb = _IdOmdb;
-        this._title = _title;
+    public MovieModel(String IdOmdb, String title) {
+        this._IdOmdb = IdOmdb;
+        this._title = title;
     }
 
-    public MovieModel(String _IdOmdb, int _year) {
-        this._IdOmdb = _IdOmdb;
-        this._year = _year;
+    public MovieModel(String IdOmdb, int year) {
+        this._IdOmdb = IdOmdb;
+        this._year = year;
     }
 }
