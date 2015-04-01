@@ -1,5 +1,4 @@
-package JlibPdewWdum.Tools;
-
+package JlibPdewWdum.api.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,16 +6,15 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 /**
- * Created by daolf on 28/03/15.
+ * Created by jlibert on 01/04/2015.
  */
-public class BddRequest {
-
+public class DatabaseManager {
     private static final String sJdbc = "jdbc:sqlite";
     //TODO a changer en fonction de votre machine
     private static final String dbLocation = "/Users/daolf/Dropbox/Cour/S8/INTEROP/IAWS-JlibPdewWdum-ProjetWS/database/bdd.db";
 
 
-    public static final ResultSet sendRequest(String req) {
+public static final ResultSet sendRequest(String req) {
 
         Connection c = null;
         Statement stmt = null;
@@ -41,5 +39,4 @@ public class BddRequest {
 
         return rs;
     }
-
 }
