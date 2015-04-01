@@ -2,8 +2,12 @@ package JlibPdewWdum.api.dao;
 
 import junit.framework.TestCase;
 import org.apache.ibatis.jdbc.ScriptRunner;
+import org.junit.Before;
 import org.junit.BeforeClass;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.Reader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -12,18 +16,29 @@ import java.sql.ResultSetMetaData;
 public class DatabaseManagerTest extends TestCase {
 
     // TODO INIT NEW DATABASE
-    @BeforeClass
-    public void initDatabase() {
+    @Before
+    public void setUp() throws Exception {
+        super.setUp();
+        System.out.print("Init test db\n");
         Connection c = null;
-        String aSQLScriptFilePath = "../../../../../database/createBDD.sql";
+        String aSQLScriptFilePath1 = "database/createBDD.sql";
+        String aSQLScriptFilePath2 = "database/addContent.sql";
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            c = DriverManager.getConnection("jdbc:sqlite:database/test.db");
 
-            ScriptRunner sr = new ScriptRunner(c, false, false);
+            ScriptRunner sr = new ScriptRunner(c);
+
+            Reader readerCreate = new BufferedReader(
+                    new FileReader(aSQLScriptFilePath1));
+            Reader readerContent = new BufferedReader(
+                    new FileReader(aSQLScriptFilePath2));
+            // Exctute script
+            sr.runScript(readerCreate);
+            sr.runScript(readerContent);
 
         } catch ( Exception e ) {
-            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
         System.out.println("Opened database successfully");
