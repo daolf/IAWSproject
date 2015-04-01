@@ -5,22 +5,48 @@ package JlibPdewWdum.api.model;
  */
 public class MovieModel {
     private String _IdOmdb;
-    private String _title;
-    private int _year;
+    private String _Title;
+    private int _Year;
+
+
+    public String getIdOmdb() {
+        return _IdOmdb;
+    }
+
+    public void setIdOmdb(String IdOmdb) {
+        this._IdOmdb = IdOmdb;
+    }
+
+    public String getTitle() {
+        return _Title;
+    }
+
+    public void setTitle(String Title) {
+        this._Title = Title;
+    }
+
+    public int getYear() {
+        return _Year;
+    }
+
+    public void setYear(int Year) {
+        this._Year = Year;
+    }
+
 
     public MovieModel(String IdOmdb, String title, int year) {
         this._IdOmdb = IdOmdb;
-        this._title = title;
-        this._year = year;
+        this._Title = title;
+        this._Year = year;
     }
 
     public MovieModel(String IdOmdb, String title) {
         this._IdOmdb = IdOmdb;
-        this._title = title;
+        this._Title = title;
     }
 
     public MovieModel(String IdOmdb, int year) {
         this._IdOmdb = IdOmdb;
-        this._year = year;
+        this._Year = year;
     }
 }
