@@ -16,7 +16,7 @@ public class OmdbClient {
     static WebResource res = c.resource("http://www.omdbapi.com/");
 
     //TODO Change return type to movie when movie class fully implemented
-    public static final String getFromYear(int year){
+    public static final String get(int year){
 
         MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
         queryParams.add("s", "");
@@ -28,7 +28,7 @@ public class OmdbClient {
 
     //TODO Change return type to movie when movie class fully implemented
 
-    public static final String getFromTitle(String title){
+    public static final String get(String title){
         MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
         queryParams.add("t", title);
         queryParams.add("r", "xml");
@@ -37,7 +37,7 @@ public class OmdbClient {
     }
 
     //TODO Change return type to movie when movie class fully implemented
-    public static final String getFromTitleYear(int year,String title){
+    public static final String get(int year, String title){
         MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
         queryParams.add("t", title);
         queryParams.add("y",Integer.toString(year));
@@ -47,8 +47,8 @@ public class OmdbClient {
     }
 
     public static void main (String[] args){
-        System.out.println(getFromTitle("harry"));
-        System.out.println(getFromTitleYear(1992,"batman"));
+        System.out.println(get("harry"));
+        System.out.println(get(1992, "batman"));
     }
 
 }
