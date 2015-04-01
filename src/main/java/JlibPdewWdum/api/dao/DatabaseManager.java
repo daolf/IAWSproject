@@ -39,4 +39,12 @@ public static final ResultSet sendRequest(String req) {
 
         return rs;
     }
+
+    public static ResultSet readRequest(String s) {
+        return null;
+    }
+
+    public static void writeRequest(String writeRequest) {
+
+    }
 }
