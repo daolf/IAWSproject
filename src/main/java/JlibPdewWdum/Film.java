@@ -16,7 +16,7 @@ public class Film {
     @Produces(MediaType.TEXT_PLAIN)
     public String getId(
             @QueryParam("t") String t,
-            @DefaultValue("-1") @QueryParam("y") int y) {
+            @QueryParam("y") int y) {
 
             //y not defined
             if (y == -1) {
