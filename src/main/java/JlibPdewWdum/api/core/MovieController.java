@@ -1,6 +1,6 @@
-package JlibPdewWdum;
+package JlibPdewWdum.api.core;
 
-import JlibPdewWdum.Tools.OmdbClient;
+import JlibPdewWdum.api.sdkomdb.MovieSDK;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -9,7 +9,7 @@ import javax.ws.rs.core.MediaType;
  * Created by daolf on 28/03/15.
  */
 @Path("film")
-public class Film {
+public class MovieController {
 
 
     @GET
@@ -20,10 +20,10 @@ public class Film {
 
             //y not defined
             if (y == -1) {
-                return OmdbClient.get(t);
+                return MovieSDK.get(t);
             }
             else {
-                return OmdbClient.get(y, t);
+                return MovieSDK.get(y, t);
             }
     }
 }

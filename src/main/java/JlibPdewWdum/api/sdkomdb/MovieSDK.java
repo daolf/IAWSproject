@@ -1,4 +1,4 @@
-package JlibPdewWdum.Tools;
+package JlibPdewWdum.api.sdkomdb;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
@@ -9,7 +9,7 @@ import javax.ws.rs.core.MultivaluedMap;
 /**
  * Created by daolf on 28/03/15.
  */
-public class OmdbClient {
+public class MovieSDK {
 
 
     static Client c = Client.create();
