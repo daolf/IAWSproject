@@ -76,6 +76,7 @@ public class DatabaseManagerTest extends TestCase {
         DatabaseManager.updateRequest(writeRequest);
         ResultSet rs = DatabaseManager.readRequest(readRequest);
         rs.next();
+        rs.next();
         assertEquals(rs.getInt(1), 9999);
         assertEquals(rs.getString(2), "testloc");
         rs.close();

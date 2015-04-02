@@ -38,7 +38,6 @@ public class DatabaseManager {
             c = DriverManager.getConnection(dbUrl);
             stmt = c.createStatement();
             rs = stmt.executeQuery(request);
-
             // can't get metadata ouf of a closed resultSet
             // rs.close();
             //stmt.close();
@@ -55,13 +54,13 @@ public class DatabaseManager {
     public static void updateRequest(String request) {
         Connection c = null;
         Statement stmt = null;
-        ResultSet rs = null;
         try {
             Class.forName("org.sqlite.JDBC");
             String dbUrl = sJdbc + ":" + getDBLocation();
             c = DriverManager.getConnection(dbUrl);
             stmt = c.createStatement();
             stmt.executeUpdate(request);
+            stmt.close();
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);

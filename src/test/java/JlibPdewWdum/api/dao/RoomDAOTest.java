@@ -22,7 +22,7 @@ public class RoomDAOTest extends TestCase {
         DatabaseManager.env = DatabaseManager.Environment.TEST;
         r1 = new RoomModel(65,1,10);
         r2 = new RoomModel(89,2,100);
-        r3 = new RoomModel(93,3,150);
+        r3 = new RoomModel(673,3,150);
         myDAO = new RoomDAO();
 
 
@@ -50,7 +50,8 @@ public class RoomDAOTest extends TestCase {
     @Test
     public void testCreate(){
         myDAO.create(r1);
-        assertEquals("Test création",r1,myDAO.find(r1.getIdRoom()));
+        RoomModel tmp = myDAO.find(r1.getIdRoom());
+        assertEquals("Test création",r1.getIdRoom(), tmp.getIdRoom());
     }
 
     @Test
@@ -62,6 +63,8 @@ public class RoomDAOTest extends TestCase {
 
     @Test
     public void testFind() {
-        assertEquals("Test find",r3, myDAO.find(r3.getIdRoom()));
+        myDAO.create(r3);
+        RoomModel tmp = myDAO.find(r3.getIdRoom());
+        assertEquals("Test find",r3.getIdRoom(), tmp.getIdRoom());
     }
 }

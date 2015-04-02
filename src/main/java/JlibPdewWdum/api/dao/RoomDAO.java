@@ -36,18 +36,17 @@ public class RoomDAO extends DAO<RoomModel> {
     @Override
     public RoomModel find(int id) {
         ResultSet rs = DatabaseManager.readRequest("SELECT * FROM Room WHERE idRoom = " + id + ";");
-        Model tmp;
+        RoomModel tmp = null;
         ResultSetMetaData rm = null;
         try {
             rm = rs.getMetaData();
             rs.next();
             tmp = new RoomModel(rs.getInt(1), rs.getInt(2),
-                                 rs.getInt(3));
+                                rs.getInt(3));
             rs.close();
-            return tmp;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return tmp;
     }
 }
