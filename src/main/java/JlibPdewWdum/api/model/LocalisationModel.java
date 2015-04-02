@@ -5,5 +5,27 @@ package JlibPdewWdum.api.model;
  */
 public class LocalisationModel {
 
+    private int id;
+    private String intitule;
 
+    public LocalisationModel(int id,String intitule) {
+        this.id = id;
+        this.intitule = intitule;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getIntitule() {
+        return intitule;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setIntitule(String intitule) {
+        this.intitule = intitule;
+    }
 }
