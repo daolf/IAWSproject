@@ -55,12 +55,12 @@ public class MovieSDKTest extends TestCase {
 
     @Test
     public void testGetMovieFromTitleYear(){
-        assertEquals("tesGetMovieFromTitleYear",m3,MovieSDK.getMovieFromTitleyear("Mononoke",2007));
+        assertEquals("tesGetMovieFromTitleYear",m3,MovieSDK.getMovieFromTitleYear("Mononoke",2007));
     }
 
     @Test
     public void testGetMoviesFromTitleYear() throws Exception {
-        ArrayList<MovieModel> l3 = MovieSDK.getMoviesFromTitle("bond",1990);
+        ArrayList<MovieModel> l3 = MovieSDK.getMoviesFromTitleYear("bond",1990);
         assertEquals("Taille getMoviesFromTitleYear", liste.size(), l3.size());
         for (int i = 0; i< l3.size(); i++) {
             assertTrue("test getMoviesFromTitleYear :" + i + "", l3.contains(liste.get(i)));
