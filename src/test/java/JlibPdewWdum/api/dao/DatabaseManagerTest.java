@@ -19,6 +19,8 @@ public class DatabaseManagerTest extends TestCase {
     @Before
     public void setUp() throws Exception {
         super.setUp();
+        DatabaseManager.env = DatabaseManager.Environment.TEST;
+
         System.out.print("Init test db\n");
         Connection c = null;
         String aSQLScriptFilePath1 = "database/createBDD.sql";
@@ -33,7 +35,8 @@ public class DatabaseManagerTest extends TestCase {
                     new FileReader(aSQLScriptFilePath1));
             Reader readerContent = new BufferedReader(
                     new FileReader(aSQLScriptFilePath2));
-            // Exctute script
+
+            // Execute script
             sr.runScript(readerCreate);
             sr.runScript(readerContent);
 
@@ -45,34 +48,36 @@ public class DatabaseManagerTest extends TestCase {
     }
 
     public void testReadRequest() throws Exception {
-        System.out.print("Test avec Select * from TECHNO\n");
-        ResultSet rs = DatabaseManager.readRequest("Select * from TECHNO");
+        System.out.print("Test avec SELECT * FROM Techno\n");
+        ResultSet rs = DatabaseManager.readRequest("SELECT * FROM Techno");
         ResultSetMetaData rm = rs.getMetaData();
         assertEquals("Nb colonne",2,rm.getColumnCount());
         assertEquals("Nom colonne 1","idTechno",rm.getColumnName(1));
-        assertEquals("Nom colonne 1","intituleTechno",rm.getColumnName(2));
+        assertEquals("Nom colonne 1", "intituleTechno", rm.getColumnName(2));
         rs.next();
         assertEquals("Tuple 1","1", rs.getObject(1).toString());
-        assertEquals("Tuple 1","3D", rs.getObject(2).toString());
+        assertEquals("Tuple 1", "3D", rs.getObject(2).toString());
         rs.next();
         assertEquals("Tuple 2","2", rs.getObject(1).toString());
-        assertEquals("Tuple 2","IMAX", rs.getObject(2).toString());
+        assertEquals("Tuple 2", "IMAX", rs.getObject(2).toString());
+        rs.close();
 
     }
 
-    public void testWriteRequest() throws Exception {
+    public void testupdateRequest() throws Exception {
 
         System.out.print("Test insertion de la Localisation d'ID 9999 et de nom \"testloc\" \n");
         String writeRequest = "INSERT INTO 'Localisation'"
-                + "('idLocalisation','intituleLocalisation')"
-                + " VALUES (9999, 'testloc');";
+                            + "('idLocalisation','intituleLocalisation')"
+                            + " VALUES (9999, 'testloc');";
         String readRequest = "Select * from LOCALISATION "
                            + "where idLocalisation = 9999";
 
-        DatabaseManager.writeRequest(writeRequest);
+        DatabaseManager.updateRequest(writeRequest);
         ResultSet rs = DatabaseManager.readRequest(readRequest);
         rs.next();
         assertEquals(rs.getInt(1), 9999);
         assertEquals(rs.getString(2), "testloc");
+        rs.close();
     }
 }
