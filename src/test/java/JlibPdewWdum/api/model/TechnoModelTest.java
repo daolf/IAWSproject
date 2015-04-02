@@ -16,11 +16,11 @@ public class TechnoModelTest extends TestCase {
 
     @Test
     public void testGetSet(){
-        assertEquals("Test getId",1,TechnoModel.getId());
-        assertEquals("Test getIntitule","IMAX",TechnoModel.getIntitule());
+        assertEquals("Test getId",1,techno.getId());
+        assertEquals("Test getIntitule","IMAX",techno.getIntitule());
         techno.setId(2);
         techno.setIntitule("3D");
-        assertEquals("Test setId",2,TechnoModel.getId());
-        assertEquals("Test setIntitule","3D",TechnoModel.getIntitule());
+        assertEquals("Test setId",2,techno.getId());
+        assertEquals("Test setIntitule","3D",techno.getIntitule());
     }
 }
