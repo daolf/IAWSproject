@@ -18,12 +18,7 @@ public class MovieController {
             @QueryParam("t") String t,
             @QueryParam("y") int y) {
 
-            //y not defined
-            if (y == -1) {
-                return MovieSDK.get(t);
-            }
-            else {
-                return MovieSDK.get(y, t);
-            }
+
+        return null;
     }
 }
