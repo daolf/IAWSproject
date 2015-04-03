@@ -30,7 +30,7 @@ public class RoomDAO extends DAO<RoomModel> {
 
     @Override
     public boolean update(RoomModel obj) {
-        return true;
+        return false;
     }
 
     @Override

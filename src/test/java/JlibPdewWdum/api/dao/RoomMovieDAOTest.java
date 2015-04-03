@@ -78,17 +78,30 @@ public class RoomMovieDAOTest extends TestCase {
         RoomModel tmpRoom = tmp.getRoom();
         MovieModel tmpMovie = tmp.getMovie();
 
-        assertEquals("Test création, check room", r1.getIdRoom(), tmpRoom.getIdRoom());
-        assertEquals("Test création, check movie", m1.getIdOmdb(), tmpMovie.getIdOmdb());
+        assertEquals("Test création 1, check room", r1.getIdRoom(), tmpRoom.getIdRoom());
+        assertEquals("Test création 1, check movie", m1.getIdOmdb(), tmpMovie.getIdOmdb());
+
+        myDAO.create(rm3);
+        tmp = myDAO.find(rm3.getRoom(), rm3.getMovie());
+
+        tmpRoom = tmp.getRoom();
+        tmpMovie = tmp.getMovie();
+        TechnoModel tmpTechno = tmp.getTechno();
+        LocalisationModel tmpLocalisation = tmp.getLocalisation();
+
+        assertEquals("Test création 3, check room", r3.getIdRoom(), tmpRoom.getIdRoom());
+        assertEquals("Test création 3, check movie", m3.getIdOmdb(), tmpMovie.getIdOmdb());
+        assertEquals("Test création 3, check techno", m3.getIdOmdb(), tmpMovie.getIdOmdb());
+        assertEquals("Test création 3, check techno", rm3.getTechno().getId(), tmpTechno.getId());
+        assertEquals("Test création 3, check localisation", rm3.getLocalisation().getId(), tmpLocalisation.getId());
 
     }
 
     public void testDelete() throws Exception {
-        assertTrue(false);
-    }
-
-    public void testUpdate() throws Exception {
-        assertTrue(false);
+        myDAO.create(rm2);
+        myDAO.delete(rm2);
+        assertEquals("Test deletion", null,
+                      myDAO.find(rm2.getRoom(), rm2.getMovie()));
     }
 
     public void testFind() throws Exception {
