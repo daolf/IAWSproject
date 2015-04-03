@@ -2,7 +2,6 @@ package JlibPdewWdum.api.sdkomdb;
 
 import JlibPdewWdum.api.model.MovieModel;
 import junit.framework.TestCase;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -41,7 +40,11 @@ public class MovieSDKTest extends TestCase {
 
     @Test
     public void testGetMovieFromTitle() throws Exception {
-        assertEquals("test getMovieFromTitle",m,MovieSDK.getMovieFromTitle("harry"));
+        MovieModel buffer = MovieSDK.getMovieFromTitle("harry");
+        assertEquals("test getMovieFromTitle", m.getIdOmdb(), buffer.getIdOmdb());
+        assertEquals("test getMovieFromTitle",m.getTitle(),buffer.getTitle());
+        assertEquals("test getMovieFromTitle", m.getYear(), buffer.getYear());
+
     }
 
     @Test
@@ -55,7 +58,12 @@ public class MovieSDKTest extends TestCase {
 
     @Test
     public void testGetMovieFromTitleYear(){
-        assertEquals("tesGetMovieFromTitleYear",m3,MovieSDK.getMovieFromTitleYear("Mononoke",2007));
+        MovieModel buffer = MovieSDK.getMovieFromTitleYear("Mononoke", 1997);
+        assertEquals("tesGetMovieFromTitleYear",m2.getIdOmdb(),buffer.getIdOmdb());
+        assertEquals("tesGetMovieFromTitleYear",m2.getTitle(),buffer.getTitle());
+        assertEquals("tesGetMovieFromTitleYear",m2.getYear(),buffer.getYear());
+
+
     }
 
     @Test

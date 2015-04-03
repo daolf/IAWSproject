@@ -5,11 +5,19 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 import org.apache.xmlbeans.XmlException;
-import org.apache.xmlbeans.XmlObject;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.w3c.dom.Element;
 
 import javax.ws.rs.core.MultivaluedMap;
-import javax.xml.crypto.dsig.XMLObject;
-import javax.xml.namespace.QName;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 /**
  * Created by daolf on 28/03/15.
@@ -19,6 +27,8 @@ public class MovieSDK {
 
     static Client c = Client.create();
     static WebResource res = c.resource("http://www.omdbapi.com/");
+    static DocumentBuilderFactory fabrique;
+    static DocumentBuilder constructeur;
 
 
 
@@ -26,14 +36,31 @@ public class MovieSDK {
     public static MovieModel getMovieFromTitle(String title) throws XmlException {
         MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
         queryParams.add("t", title);
-        queryParams.add("s", "xml");
+        queryParams.add("r", "xml");
         String s = res.queryParams(queryParams).get(String.class);
-        XmlObject xml = XmlObject.Factory.parse(s);
-        return new MovieModel(xml.selectAttribute(new QName("imdbID")).toString(),
-                xml.selectAttribute(new QName("title")).toString(),
-                xml.selectAttribute(new QName("year")).toString());
+        System.out.println("String reçue:"+s);
+        MovieModel m = null;
 
-        return null;
+        try {
+            fabrique = DocumentBuilderFactory.newInstance();
+            constructeur = fabrique.newDocumentBuilder();
+            Document document = constructeur.parse(new InputSource(new StringReader(s)));
+
+            final Element racine = document.getDocumentElement();
+            final Element movie = (Element) racine.getChildNodes().item(0);
+            m = new MovieModel( movie.getAttribute("imdbID"),
+                                movie.getAttribute("title"),
+                                Integer.parseInt(movie.getAttribute("year")));
+
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch(SAXException se) {
+            System.out.println("Erreur lors du parsing du document");
+        } catch(IOException ioe) {
+            System.out.println("Erreur d'entrée/sortie");
+        }
+
+        return m;
     }
 
     public static ArrayList<MovieModel> getMoviesFromTitle(String title){
@@ -43,7 +70,34 @@ public class MovieSDK {
     }
 
     public static MovieModel getMovieFromTitleYear(String title, int year){
-        return null;
+        MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+        queryParams.add("t", title);
+        queryParams.add("y", Integer.toString(year));
+        queryParams.add("r", "xml");
+        String s = res.queryParams(queryParams).get(String.class);
+        System.out.println("String reçue:"+s);
+        MovieModel m = null;
+
+        try {
+            fabrique = DocumentBuilderFactory.newInstance();
+            constructeur = fabrique.newDocumentBuilder();
+            Document document = constructeur.parse(new InputSource(new StringReader(s)));
+
+            final Element racine = document.getDocumentElement();
+            final Element movie = (Element) racine.getChildNodes().item(0);
+            m = new MovieModel( movie.getAttribute("imdbID"),
+                    movie.getAttribute("title"),
+                    Integer.parseInt(movie.getAttribute("year")));
+
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch(SAXException se) {
+            System.out.println("Erreur lors du parsing du document");
+        } catch(IOException ioe) {
+            System.out.println("Erreur d'entrée/sortie");
+        }
+
+        return m;
     }
 
     public static ArrayList<MovieModel> getMoviesFromTitleYear(String title,int year){
