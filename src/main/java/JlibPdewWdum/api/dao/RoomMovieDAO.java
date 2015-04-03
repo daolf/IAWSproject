@@ -11,16 +11,16 @@ public class RoomMovieDAO extends DAO<RoomMovieModel> {
     @Override
     public boolean create(RoomMovieModel obj) {
         String columnRequest = "(idRoom, idMovie, nbPlaceUsed, date" +
-                (obj.getLocalisation() != null ? ", idLocalisation" : "")+
+                (obj.getLocalisation() != null ? ", idLocalisation" : "") +
                 (obj.getTechno() != null ? ", idTechno" : "") + ")";
         String request = "INSERT INTO RoomMovieAssociation" + columnRequest +
                 "VALUES ("
                 + obj.getRoom().getIdRoom() + ","
-                + "'" +obj.getMovie().getIdOmdb() + "'" + ","
+                + "'" + obj.getMovie().getIdOmdb() + "'" + ","
                 + obj.getNbPlaceUsed() + ","
                 + obj.getDate().toInstant().getEpochSecond()
-                + (obj.getLocalisation() != null ? ","+ obj.getTechno().getId() : "")
-                + (obj.getTechno() != null ? ","+obj.getLocalisation().getId() : "")
+                + (obj.getLocalisation() != null ? "," + obj.getTechno().getId() : "")
+                + (obj.getTechno() != null ? "," + obj.getLocalisation().getId() : "")
                 + ");";
 
 
@@ -31,7 +31,10 @@ public class RoomMovieDAO extends DAO<RoomMovieModel> {
 
     @Override
     public boolean delete(RoomMovieModel obj) {
-        return false;
+        DatabaseManager.updateRequest("DELETE FROM RoomMovieAssociation "
+                + "WHERE idRoom =" + obj.getRoom().getIdRoom()
+                + " AND idMovie = " + "'" + obj.getMovie().getIdOmdb() + "'" + ";");
+        return true;
     }
 
     @Override

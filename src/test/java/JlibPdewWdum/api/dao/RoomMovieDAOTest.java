@@ -100,7 +100,6 @@ public class RoomMovieDAOTest extends TestCase {
     public void testDelete() throws Exception {
         myDAO.create(rm2);
         myDAO.delete(rm2);
-        assertTrue(false);
         assertEquals("Test deletion", null,
                 myDAO.find(rm2.getRoom(), rm2.getMovie()));
     }
