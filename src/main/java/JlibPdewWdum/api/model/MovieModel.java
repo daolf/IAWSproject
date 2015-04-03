@@ -49,4 +49,5 @@ public class MovieModel {
         this._IdOmdb = IdOmdb;
         this._Year = year;
     }
+
 }
