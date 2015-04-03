@@ -52,7 +52,9 @@ public class MovieSDKTest extends TestCase {
         ArrayList<MovieModel> l2 = MovieSDK.getMoviesFromTitle("Mononoke");
         assertEquals("Taille getMoviesFromTitle", liste.size(), l2.size());
         for (int i = 0; i< l2.size(); i++) {
-            assertTrue("test getMoviesFromTitle :" + i + "", l2.contains(liste.get(i)));
+            assertEquals("test getMoviesFromTitle", liste.get(i).getIdOmdb(), l2.get(i).getIdOmdb());
+            assertEquals("test getMoviesFromTitle",liste.get(i).getTitle(),l2.get(i).getTitle());
+            assertEquals("test getMoviesFromTitle", liste.get(i).getYear(), l2.get(i).getYear());
         }
     }
 
@@ -69,9 +71,11 @@ public class MovieSDKTest extends TestCase {
     @Test
     public void testGetMoviesFromTitleYear() throws Exception {
         ArrayList<MovieModel> l3 = MovieSDK.getMoviesFromTitleYear("bond",1990);
-        assertEquals("Taille getMoviesFromTitleYear", liste.size(), l3.size());
+        assertEquals("Taille getMoviesFromTitleYear", liste2.size(), l3.size());
         for (int i = 0; i< l3.size(); i++) {
-            assertTrue("test getMoviesFromTitleYear :" + i + "", l3.contains(liste.get(i)));
+            assertEquals("test getMoviesFromTitleYear", liste2.get(i).getIdOmdb(), l3.get(i).getIdOmdb());
+            assertEquals("test getMoviesFromTitleYear",liste2.get(i).getTitle(),l3.get(i).getTitle());
+            assertEquals("test getMoviesFromTitleYear", liste2.get(i).getYear(), l3.get(i).getYear());
         }
     }
 
