@@ -27,118 +27,42 @@ import java.util.Scanner;
  */
 public class MovieSDK {
 
-
     static Client c = Client.create();
     static WebResource res = c.resource("http://www.omdbapi.com/");
     static DocumentBuilderFactory fabrique;
     static DocumentBuilder constructeur;
 
 
-
-
     public static MovieModel getMovieFromTitle(String title) throws XmlException {
-        MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
-        queryParams.add("t", title);
-        queryParams.add("r", "xml");
-        String s = res.queryParams(queryParams).get(String.class);
-        System.out.println("String reçue:"+s);
-        MovieModel m = null;
-
-        try {
-            fabrique = DocumentBuilderFactory.newInstance();
-            constructeur = fabrique.newDocumentBuilder();
-            Document document = constructeur.parse(new InputSource(new StringReader(s)));
-
-            final Element racine = document.getDocumentElement();
-            final Element movie = (Element) racine.getChildNodes().item(0);
-
-            /*Normalize year attirbute*/
-            Scanner in = new Scanner(movie.getAttribute("year")).useDelimiter("[^0-9]+");
-            int goodYear = in.nextInt();
-            System.out.println("Année bien formatée :" + goodYear);
-
-
-            m = new MovieModel( movie.getAttribute("imdbID"),
-                                movie.getAttribute("title"),
-                                goodYear);
-
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch(SAXException se) {
-            System.out.println("Erreur lors du parsing du document");
-        } catch(IOException ioe) {
-            System.out.println("Erreur d'entrée/sortie");
-        }
-
-        return m;
+        return MovieSDK.getMovieFromTitleYear(title,-1);
     }
 
     public static ArrayList<MovieModel> getMoviesFromTitle(String title){
-        MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
-        queryParams.add("s", title);
-        queryParams.add("r", "xml");
-        String s = res.queryParams(queryParams).get(String.class);
-        System.out.println("String reçue:"+s);
-        ArrayList<MovieModel> m = new ArrayList<MovieModel>();
-
-        try {
-            fabrique = DocumentBuilderFactory.newInstance();
-            constructeur = fabrique.newDocumentBuilder();
-            Document document = constructeur.parse(new InputSource(new StringReader(s)));
-
-            final Element racine = document.getDocumentElement();
-            final NodeList movies = racine.getChildNodes();
-            System.out.println("Taille node list :"+movies.getLength());
-            for (int i=0; i<movies.getLength();i++) {
-                final Element movie = (Element) movies.item(i);
-
-                /*Normalize year attribute*/
-                Scanner in = new Scanner(movie.getAttribute("Year")).useDelimiter("[^0-9]+");
-                int goodYear = in.nextInt();
-                System.out.println("Année bien formatée :" + goodYear);
-
-                m.add(  new MovieModel(movie.getAttribute("imdbID"),
-                        movie.getAttribute("Title"),
-                        goodYear)
-                        );
-            }
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch(SAXException se) {
-            System.out.println("Erreur lors du parsing du document");
-        } catch(IOException ioe) {
-            System.out.println("Erreur d'entrée/sortie");
-        }
-
-        return m;
+        return MovieSDK.getMoviesFromTitleYear(title,-1);
     }
 
     public static MovieModel getMovieFromTitleYear(String title, int year){
         MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
         queryParams.add("t", title);
-        queryParams.add("y", Integer.toString(year));
+        //Pour pouvoir réutiliser le code dans getMovieFromTitle
+        if(year != -1) {
+            queryParams.add("y", Integer.toString(year));
+        }
         queryParams.add("r", "xml");
         String s = res.queryParams(queryParams).get(String.class);
         System.out.println("String reçue:"+s);
         MovieModel m = null;
-
         try {
             fabrique = DocumentBuilderFactory.newInstance();
             constructeur = fabrique.newDocumentBuilder();
             Document document = constructeur.parse(new InputSource(new StringReader(s)));
-
             final Element racine = document.getDocumentElement();
             final Element movie = (Element) racine.getChildNodes().item(0);
-
             /*Normalize year attirbute*/
-            Scanner in = new Scanner(movie.getAttribute("year")).useDelimiter("[^0-9]+");
-            int goodYear = in.nextInt();
-            System.out.println("Année bien formatée :" + goodYear);
-
+            int goodYear = MovieSDK.extractFirstInt(movie.getAttribute("year"));
             m = new MovieModel( movie.getAttribute("imdbID"),
                     movie.getAttribute("title"),
                     goodYear);
-
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         } catch(SAXException se) {
@@ -146,7 +70,6 @@ public class MovieSDK {
         } catch(IOException ioe) {
             System.out.println("Erreur d'entrée/sortie");
         }
-
         return m;
     }
 
@@ -154,31 +77,24 @@ public class MovieSDK {
         MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
         queryParams.add("s", title);
         queryParams.add("r", "xml");
-        queryParams.add("y", Integer.toString(year));
+        //Pour pouvoir réutiliser le code dans getMoviesFromTitle
+        if(year != -1) {
+            queryParams.add("y", Integer.toString(year));
+        }
         String s = res.queryParams(queryParams).get(String.class);
         System.out.println("String reçue:"+s);
         ArrayList<MovieModel> m = new ArrayList<MovieModel>();
-
         try {
             fabrique = DocumentBuilderFactory.newInstance();
             constructeur = fabrique.newDocumentBuilder();
             Document document = constructeur.parse(new InputSource(new StringReader(s)));
-
             final Element racine = document.getDocumentElement();
             final NodeList movies = racine.getChildNodes();
-
-
-
-
             System.out.println("Taille node list :"+movies.getLength());
             for (int i=0; i<movies.getLength();i++) {
                 final Element movie = (Element) movies.item(i);
-
-                /*Normalize year attirbute*/
-                Scanner in = new Scanner(movie.getAttribute("Year")).useDelimiter("[^0-9]+");
-                int goodYear = in.nextInt();
+                int goodYear = MovieSDK.extractFirstInt(movie.getAttribute("Year"));
                 System.out.println("Année bien formatée :" + goodYear);
-
                 System.out.println("Attibuts film :"+movie.toString());
                 m.add(  new MovieModel(movie.getAttribute("imdbID"),
                                 movie.getAttribute("Title"),
@@ -194,6 +110,12 @@ public class MovieSDK {
         }
 
         return m;
+    }
+
+    public static int extractFirstInt(String s) {
+        Scanner in = new Scanner(s).useDelimiter("[^0-9]+");
+        int goodYear = in.nextInt();
+        return goodYear;
     }
 
 }
