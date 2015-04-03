@@ -18,19 +18,19 @@ public class RoomDAO extends DAO<RoomModel> {
                                        + obj.getIdRoom() + ","
                                        + obj.getIdCinema() + ","
                                        + obj.getNbPlaceRoom() + ");");
-        return false;
+        return true;
     }
 
     @Override
     public boolean delete(RoomModel obj) {
         DatabaseManager.updateRequest("DELETE FROM Room WHERE idRoom = "
                                        + obj.getIdRoom() + ";");
-        return false;
+        return true;
     }
 
     @Override
     public boolean update(RoomModel obj) {
-        return false;
+        return true;
     }
 
     @Override
