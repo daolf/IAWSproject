@@ -48,6 +48,15 @@ public class MovieSDKTest extends TestCase {
     }
 
     @Test
+    public void testGetMovieFromID() throws Exception {
+        MovieModel buffer = MovieSDK.getMovieFromID("tt1201607");
+        assertEquals("test getMovieFromTitle", m.getIdOmdb(), buffer.getIdOmdb());
+        assertEquals("test getMovieFromTitle",m.getTitle(),buffer.getTitle());
+        assertEquals("test getMovieFromTitle", m.getYear(), buffer.getYear());
+
+    }
+
+    @Test
     public void testGetMoviesFromTitle(){
         ArrayList<MovieModel> l2 = MovieSDK.getMoviesFromTitle("Mononoke");
         assertEquals("Taille getMoviesFromTitle", liste.size(), l2.size());
