@@ -1,6 +1,7 @@
 package JlibPdewWdum.api.dao;
 
 import JlibPdewWdum.api.model.*;
+import JlibPdewWdum.api.sdkomdb.MovieSDK;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -21,8 +22,8 @@ public class RoomMovieDAO extends DAO<RoomMovieModel> {
                 + "'" + obj.getMovie().getIdOmdb() + "'" + ","
                 + obj.getNbPlaceUsed() + ","
                 + obj.getDate().toInstant().getEpochSecond()
-                + (obj.getLocalisation() != null ? "," + obj.getTechno().getId() : "")
                 + (obj.getTechno() != null ? "," + obj.getLocalisation().getId() : "")
+                + (obj.getLocalisation() != null ? "," + obj.getTechno().getId() : "")
                 + ");";
 
 
@@ -65,9 +66,9 @@ public class RoomMovieDAO extends DAO<RoomMovieModel> {
             RoomModel roomModel = roomDAO.find(idRoom);
             MovieModel movieModel = MovieSDK.getMovieFromID(idMovie);
             TechnoDAO technoDAO = new TechnoDAO();
-            TechnoModel technoModel = TechnoDAO.find(rs.getInt(6));
+            TechnoModel technoModel = technoDAO.find(rs.getInt(6));
             LocalisationDAO localisationDAO = new LocalisationDAO();
-            LocalisationModel localisationModel = LocalisationDAO.find(rs.getInt(5));
+            LocalisationModel localisationModel = localisationDAO.find(rs.getInt(5));
             tmp = new RoomMovieModel(roomModel, movieModel,
                     rs.getString(4), localisationModel,technoModel );
             rs.close();
@@ -75,5 +76,5 @@ public class RoomMovieDAO extends DAO<RoomMovieModel> {
             e.printStackTrace();
         }
         return tmp;
-    }    }
+    }
 }
