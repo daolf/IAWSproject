@@ -73,7 +73,8 @@ public class RoomMovieDAOTest extends TestCase {
 
     public void testCreate() throws Exception {
         myDAO.create(rm1);
-        RoomMovieModel tmp = myDAO.find(rm1.getRoom(), rm1.getMovie());
+        RoomMovieModel tmp = myDAO.find(rm1.getRoom().getIdRoom(),
+                                        rm1.getMovie().getIdOmdb());
 
         RoomModel tmpRoom = tmp.getRoom();
         MovieModel tmpMovie = tmp.getMovie();
@@ -82,7 +83,7 @@ public class RoomMovieDAOTest extends TestCase {
         assertEquals("Test création 1, check movie", m1.getIdOmdb(), tmpMovie.getIdOmdb());
 
         myDAO.create(rm3);
-        tmp = myDAO.find(rm3.getRoom(), rm3.getMovie());
+        tmp = myDAO.find(rm3.getRoom().getIdRoom(), rm3.getMovie().getIdOmdb());
 
         tmpRoom = tmp.getRoom();
         tmpMovie = tmp.getMovie();
@@ -91,9 +92,9 @@ public class RoomMovieDAOTest extends TestCase {
 
         assertEquals("Test création 3, check room", r3.getIdRoom(), tmpRoom.getIdRoom());
         assertEquals("Test création 3, check movie", m3.getIdOmdb(), tmpMovie.getIdOmdb());
-        assertEquals("Test création 3, check techno", m3.getIdOmdb(), tmpMovie.getIdOmdb());
         assertEquals("Test création 3, check techno", rm3.getTechno().getId(), tmpTechno.getId());
-        assertEquals("Test création 3, check localisation", rm3.getLocalisation().getId(), tmpLocalisation.getId());
+        assertEquals("Test création 3, check localisation", rm3.getLocalisation().getId(),
+                                                            tmpLocalisation.getId());
 
     }
 
@@ -101,14 +102,16 @@ public class RoomMovieDAOTest extends TestCase {
         myDAO.create(rm2);
         myDAO.delete(rm2);
         assertEquals("Test deletion", null,
-                myDAO.find(rm2.getRoom(), rm2.getMovie()));
+                myDAO.find(rm2.getRoom().getIdRoom(), rm2.getMovie().getIdOmdb()));
     }
 
     public void testFind() throws Exception {
         myDAO.create(rm3);
-        RoomMovieModel tmp = myDAO.find(r3.getIdRoom());
-        assertEquals("Test find - check id movie",rm3.getMovie().getIdOmdb(), tmp.getMovie().getIdOmdb());
-        assertEquals("Test find - check id room",rm3.getRoom().getIdRoom(), tmp.getRoom().getIdRoom());
+        RoomMovieModel tmp = myDAO.find(r3.getIdRoom(), m3.getIdOmdb());
+        assertEquals("Test find - check id movie",rm3.getMovie().getIdOmdb(),
+                                                  tmp.getMovie().getIdOmdb());
+        assertEquals("Test find - check id room",rm3.getRoom().getIdRoom(),
+                                                 tmp.getRoom().getIdRoom());
     }
 
 }
