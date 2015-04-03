@@ -1,5 +1,10 @@
 package JlibPdewWdum.api.model;
 
+import org.glassfish.grizzly.http.util.TimeStamp;
+
+import java.sql.Timestamp;
+import java.time.Instant;
+
 /**
  * Created by daolf on 02/04/15.
  */
@@ -7,17 +12,30 @@ public class RoomMovieModel {
     private RoomModel room;
     private MovieModel movie;
     private int nbPlaceUsed;
-    private String date;
+    private Timestamp date;
     private LocalisationModel localisation;
     private TechnoModel techno;
 
     public RoomMovieModel(RoomModel room, MovieModel movie, String date, LocalisationModel localisation, TechnoModel techno) {
         this.room = room;
         this.movie = movie;
-        this.date = date;
+        if(date == "")
+            this.date = Timestamp.from(Instant.now());
+        else
+            this.date = Timestamp.from(Instant.ofEpochSecond(Long.valueOf(date)));
         this.localisation = localisation;
         this.techno = techno;
         this.nbPlaceUsed = 0;
+    }
+
+    public RoomMovieModel(RoomModel room, MovieModel movie, String date){
+        this(room, movie, date, null, null);
+    }
+    public RoomMovieModel(RoomModel room, MovieModel movie, String date, LocalisationModel localisation) {
+        this(room, movie, date, localisation, null);
+    }
+    public RoomMovieModel(RoomModel room, MovieModel movie, String date, TechnoModel techno) {
+        this(room, movie, date, null, techno);
     }
 
     public RoomModel getRoom() {
@@ -44,12 +62,12 @@ public class RoomMovieModel {
         this.nbPlaceUsed = nbPlaceUsed;
     }
 
-    public String getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
     public void setDate(String date) {
-        this.date = date;
+        this.date = Timestamp.from(Instant.parse(date));
     }
 
     public LocalisationModel getLocalisation() {
