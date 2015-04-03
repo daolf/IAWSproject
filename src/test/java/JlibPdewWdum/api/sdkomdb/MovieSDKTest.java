@@ -1,25 +1,82 @@
 package JlibPdewWdum.api.sdkomdb;
 
+import JlibPdewWdum.api.model.MovieModel;
 import junit.framework.TestCase;
-import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MovieSDKTest extends TestCase {
+
+    private MovieModel m;
+    private MovieModel m2;
+    private MovieModel m3;
+    private MovieModel m4;
+    private MovieModel m5;
+    private MovieModel m6;
+    private ArrayList<MovieModel> liste ;
+    private ArrayList<MovieModel> liste2 ;
+
+
+    @Before
+    public void setUp() throws Exception {
+        super.setUp();
+        m = new MovieModel("tt1201607","Harry Potter and the Deathly Hallows: Part 2",2011);
+        m2 = new MovieModel("tt0119698","Princess Mononoke",1997);
+        m3 = new MovieModel("tt1992935","Mononoke",2007);
+        m4 = new MovieModel("tt0484454","Princess Mononoke: Making of a Masterpiece",2004);
+        m5 = new MovieModel("tt1339452","James Bond: Q's Armoury",1990);
+        m6 = new MovieModel("tt0100374","Plead Guilty, Get a Bond",1990);
+        liste = new ArrayList<MovieModel>();
+        liste.add(m2);
+        liste.add(m3);
+        liste.add(m4);
+        liste2 = new ArrayList<MovieModel>();
+        liste2.add(m5);
+        liste2.add(m6);
+    }
+
     @Test
-    public void testGetFromYear() throws Exception {
+    public void testGetMovieFromTitle() throws Exception {
+        MovieModel buffer = MovieSDK.getMovieFromTitle("harry");
+        assertEquals("test getMovieFromTitle", m.getIdOmdb(), buffer.getIdOmdb());
+        assertEquals("test getMovieFromTitle",m.getTitle(),buffer.getTitle());
+        assertEquals("test getMovieFromTitle", m.getYear(), buffer.getYear());
 
     }
 
     @Test
-    public void testGetFromTitle() throws Exception {
-        String r1 = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><root response=\"True\"><movie title=\"Harry Potter and the Deathly Hallows: Part 2\" year=\"2011\" rated=\"PG-13\" released=\"15 Jul 2011\" runtime=\"130 min\" genre=\"Adventure, Fantasy, Mystery\" director=\"David Yates\" writer=\"Steve Kloves (screenplay), J.K. Rowling (novel)\" actors=\"Ralph Fiennes, Michael Gambon, Alan Rickman, Daniel Radcliffe\" plot=\"Harry, Ron and Hermione search for Voldemort's remaining Horcruxes in their effort to destroy the Dark Lord as the final battle rages on at Hogwarts.\" language=\"English\" country=\"USA, UK\" awards=\"Nominated for 3 Oscars. Another 48 wins &amp; 75 nominations.\" poster=\"http://ia.media-imdb.com/images/M/MV5BMTY2MTk3MDQ1N15BMl5BanBnXkFtZTcwMzI4NzA2NQ@@._V1_SX300.jpg\" metascore=\"87\" imdbRating=\"8.1\" imdbVotes=\"433,883\" imdbID=\"tt1201607\" type=\"movie\"/></root>";
-        Assert.assertEquals("Test harry", r1, MovieSDK.get("harry"));
+    public void testGetMoviesFromTitle(){
+        ArrayList<MovieModel> l2 = MovieSDK.getMoviesFromTitle("Mononoke");
+        assertEquals("Taille getMoviesFromTitle", liste.size(), l2.size());
+        for (int i = 0; i< l2.size(); i++) {
+            assertEquals("test getMoviesFromTitle", liste.get(i).getIdOmdb(), l2.get(i).getIdOmdb());
+            assertEquals("test getMoviesFromTitle",liste.get(i).getTitle(),l2.get(i).getTitle());
+            assertEquals("test getMoviesFromTitle", liste.get(i).getYear(), l2.get(i).getYear());
+        }
     }
 
     @Test
-    public void testGetFromTitleYear() throws Exception {
-        String r1 = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><root response=\"True\"><movie title=\"Batman Returns\" year=\"1992\" rated=\"PG-13\" released=\"19 Jun 1992\" runtime=\"126 min\" genre=\"Action\" director=\"Tim Burton\" writer=\"Bob Kane (Batman characters), Daniel Waters (story), Sam Hamm (story), Daniel Waters (screenplay)\" actors=\"Michael Keaton, Danny DeVito, Michelle Pfeiffer, Christopher Walken\" plot=\"When a corrupt businessman and the grotesque Penguin plot to take control of Gotham City, only Batman can stop them, while the Catwoman has her own agenda.\" language=\"English\" country=\"USA, UK\" awards=\"Nominated for 2 Oscars. Another 2 wins &amp; 14 nominations.\" poster=\"http://ia.media-imdb.com/images/M/MV5BODM2OTc0Njg2OF5BMl5BanBnXkFtZTgwMDA4NjQxMTE@._V1_SX300.jpg\" metascore=\"N/A\" imdbRating=\"7.0\" imdbVotes=\"185,673\" imdbID=\"tt0103776\" type=\"movie\"/></root>";
-        Assert.assertEquals("Test batman, 1992", r1, MovieSDK.get(1992, "batman"));
+    public void testGetMovieFromTitleYear(){
+        MovieModel buffer = MovieSDK.getMovieFromTitleYear("Mononoke", 1997);
+        assertEquals("tesGetMovieFromTitleYear",m2.getIdOmdb(),buffer.getIdOmdb());
+        assertEquals("tesGetMovieFromTitleYear",m2.getTitle(),buffer.getTitle());
+        assertEquals("tesGetMovieFromTitleYear",m2.getYear(),buffer.getYear());
+
+
+    }
+
+    @Test
+    public void testGetMoviesFromTitleYear() throws Exception {
+        ArrayList<MovieModel> l3 = MovieSDK.getMoviesFromTitleYear("bond",1990);
+        assertEquals("Taille getMoviesFromTitleYear", liste2.size(), l3.size());
+        for (int i = 0; i< l3.size(); i++) {
+            assertEquals("test getMoviesFromTitleYear", liste2.get(i).getIdOmdb(), l3.get(i).getIdOmdb());
+            assertEquals("test getMoviesFromTitleYear",liste2.get(i).getTitle(),l3.get(i).getTitle());
+            assertEquals("test getMoviesFromTitleYear", liste2.get(i).getYear(), l3.get(i).getYear());
+        }
     }
 
 }
