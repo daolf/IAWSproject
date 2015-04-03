@@ -101,11 +101,14 @@ public class RoomMovieDAOTest extends TestCase {
         myDAO.create(rm2);
         myDAO.delete(rm2);
         assertEquals("Test deletion", null,
-                      myDAO.find(rm2.getRoom(), rm2.getMovie()));
+                myDAO.find(rm2.getRoom(), rm2.getMovie()));
     }
 
     public void testFind() throws Exception {
-        assertTrue(false);
+        myDAO.create(rm3);
+        RoomMovieModel tmp = myDAO.find(r3.getIdRoom());
+        assertEquals("Test find - check id movie",rm3.getMovie().getIdOmdb(), tmp.getMovie().getIdOmdb());
+        assertEquals("Test find - check id room",rm3.getRoom().getIdRoom(), tmp.getRoom().getIdRoom());
     }
 
 }
