@@ -1,8 +1,10 @@
 package JlibPdewWdum.api.dao;
 
-import JlibPdewWdum.api.model.MovieModel;
-import JlibPdewWdum.api.model.RoomModel;
-import JlibPdewWdum.api.model.RoomMovieModel;
+import JlibPdewWdum.api.model.*;
+
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 
 /**
  * Created by jlibert on 03/04/2015.
@@ -47,7 +49,31 @@ public class RoomMovieDAO extends DAO<RoomMovieModel> {
         return null;
     }
 
-    public RoomMovieModel find(RoomModel room, MovieModel movie) {
-        return null;
-    }
+    public RoomMovieModel find(int idRoom, String idMovie) {
+        ResultSet rs = DatabaseManager.readRequest("SELECT * FROM "
+                + "RoomMovieAssociation WHERE idRoom = " + idRoom
+                + " AND idMovie = '" + idMovie + "';");
+        RoomMovieModel tmp = null;
+        ResultSetMetaData rm = null;
+        try {
+
+
+            rm = rs.getMetaData();
+            rs.next();
+
+            RoomDAO roomDAO = new RoomDAO();
+            RoomModel roomModel = roomDAO.find(idRoom);
+            MovieModel movieModel = MovieSDK.getMovieFromID(idMovie);
+            TechnoDAO technoDAO = new TechnoDAO();
+            TechnoModel technoModel = TechnoDAO.find(rs.getInt(6));
+            LocalisationDAO localisationDAO = new LocalisationDAO();
+            LocalisationModel localisationModel = LocalisationDAO.find(rs.getInt(5));
+            tmp = new RoomMovieModel(roomModel, movieModel,
+                    rs.getString(4), localisationModel,technoModel );
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tmp;
+    }    }
 }
