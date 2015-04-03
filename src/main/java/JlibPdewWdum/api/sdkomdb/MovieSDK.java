@@ -73,6 +73,34 @@ public class MovieSDK {
         return m;
     }
 
+    public static MovieModel getMovieFromID(String id){
+        MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+        queryParams.add("i", id);
+        queryParams.add("r", "xml");
+        String s = res.queryParams(queryParams).get(String.class);
+        System.out.println("String reçue:"+s);
+        MovieModel m = null;
+        try {
+            fabrique = DocumentBuilderFactory.newInstance();
+            constructeur = fabrique.newDocumentBuilder();
+            Document document = constructeur.parse(new InputSource(new StringReader(s)));
+            final Element racine = document.getDocumentElement();
+            final Element movie = (Element) racine.getChildNodes().item(0);
+            /*Normalize year attirbute*/
+            int goodYear = MovieSDK.extractFirstInt(movie.getAttribute("year"));
+            m = new MovieModel( movie.getAttribute("imdbID"),
+                    movie.getAttribute("title"),
+                    goodYear);
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch(SAXException se) {
+            System.out.println("Erreur lors du parsing du document");
+        } catch(IOException ioe) {
+            System.out.println("Erreur d'entrée/sortie");
+        }
+        return m;
+    }
+
     public static ArrayList<MovieModel> getMoviesFromTitleYear(String title,int year){
         MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
         queryParams.add("s", title);
@@ -111,6 +139,8 @@ public class MovieSDK {
 
         return m;
     }
+
+
 
     public static int extractFirstInt(String s) {
         Scanner in = new Scanner(s).useDelimiter("[^0-9]+");
