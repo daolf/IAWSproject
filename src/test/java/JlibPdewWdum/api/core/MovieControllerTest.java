@@ -20,10 +20,10 @@ public class MovieControllerTest extends JerseyTest {
 
     @Test
     public void testGetMovie() {
-        final String error = target("/movie").queryParam("id","t").request().get(String.class);
+        final String error = target("/movie").path("1").request().get(String.class);
         assertEquals("Test erreur","{ \"error\": \"bad id\"}", error);
 
-        final String movie = target("/movie").queryParam("id","tt0178145").request().get(String.class);
+        final String movie = target("/movie").path("tt0178145").request().get(String.class);
         assertEquals("{\"title\":\"Joan of Arc\",\"year\":1999,\"idOmdb\":\"tt0178145\"}",movie);
     }
 
