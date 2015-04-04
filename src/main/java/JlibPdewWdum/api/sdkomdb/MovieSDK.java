@@ -86,11 +86,19 @@ public class MovieSDK {
             Document document = constructeur.parse(new InputSource(new StringReader(s)));
             final Element racine = document.getDocumentElement();
             final Element movie = (Element) racine.getChildNodes().item(0);
+
+            //if error
+            if (movie.getNodeName() == "error") {
+                m = null;
+            }
+
+            else {
             /*Normalize year attirbute*/
-            int goodYear = MovieSDK.extractFirstInt(movie.getAttribute("year"));
-            m = new MovieModel( movie.getAttribute("imdbID"),
-                    movie.getAttribute("title"),
-                    goodYear);
+                int goodYear = MovieSDK.extractFirstInt(movie.getAttribute("year"));
+                m = new MovieModel(movie.getAttribute("imdbID"),
+                        movie.getAttribute("title"),
+                        goodYear);
+            }
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         } catch(SAXException se) {

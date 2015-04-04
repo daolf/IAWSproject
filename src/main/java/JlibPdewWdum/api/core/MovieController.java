@@ -25,18 +25,19 @@ public class MovieController {
         MovieModel myMovie = MovieSDK.getMovieFromID(id);
         ObjectMapper mapper = new ObjectMapper();
         String s = null;
-        try
-        {
-            s = mapper.writeValueAsString(myMovie);
-        } catch (JsonGenerationException e)
-        {
-            e.printStackTrace();
-        } catch (JsonMappingException e)
-        {
-            e.printStackTrace();
-        } catch (IOException e)
-        {
-            e.printStackTrace();
+        if (myMovie == null) {
+            s = "{ error: bad id}";
+        }
+        else {
+            try {
+                s = mapper.writeValueAsString(myMovie);
+            } catch (JsonGenerationException e) {
+                e.printStackTrace();
+            } catch (JsonMappingException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         System.out.println("---------");
         return s;
