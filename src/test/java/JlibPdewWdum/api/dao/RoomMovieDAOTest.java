@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.Reader;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.ArrayList;
 
 public class RoomMovieDAOTest extends TestCase {
     private RoomMovieDAO myDAO;
@@ -58,11 +59,11 @@ public class RoomMovieDAOTest extends TestCase {
         r2 = new RoomModel(5, 2, 9);
         r3 = new RoomModel(9, 1, 11);
 
-        rm1 = new RoomMovieModel(r1, m1, "");
+        rm1 = new RoomMovieModel(r1, m1.getIdOmdb(), "");
 
         //le 3/4/2015 à 3:05:52
-        rm2 = new RoomMovieModel(r2, m2, "1428023152");
-        rm3 = new RoomMovieModel(r3, m3, "",
+        rm2 = new RoomMovieModel(r2, m2.getIdOmdb(), "1428023152");
+        rm3 = new RoomMovieModel(r3, m3.getIdOmdb(), "",
                 new LocalisationModel(3, "VOSTFR"),
                 new TechnoModel(1, "3D"));
 
@@ -74,16 +75,16 @@ public class RoomMovieDAOTest extends TestCase {
     public void testCreate() throws Exception {
         myDAO.create(rm1);
         RoomMovieModel tmp = myDAO.find(rm1.getRoom().getIdRoom(),
-                                        rm1.getMovie().getIdOmdb());
+                                        rm1.getMovie());
 
         RoomModel tmpRoom = tmp.getRoom();
-        MovieModel tmpMovie = tmp.getMovie();
+        String tmpMovie = tmp.getMovie();
 
         assertEquals("Test création 1, check room", r1.getIdRoom(), tmpRoom.getIdRoom());
-        assertEquals("Test création 1, check movie", m1.getIdOmdb(), tmpMovie.getIdOmdb());
+        assertEquals("Test création 1, check movie", m1.getIdOmdb(), tmpMovie);
 
         myDAO.create(rm3);
-        tmp = myDAO.find(rm3.getRoom().getIdRoom(), rm3.getMovie().getIdOmdb());
+        tmp = myDAO.find(rm3.getRoom().getIdRoom(), rm3.getMovie());
 
         tmpRoom = tmp.getRoom();
         tmpMovie = tmp.getMovie();
@@ -91,7 +92,7 @@ public class RoomMovieDAOTest extends TestCase {
         LocalisationModel tmpLocalisation = tmp.getLocalisation();
 
         assertEquals("Test création 3, check room", r3.getIdRoom(), tmpRoom.getIdRoom());
-        assertEquals("Test création 3, check movie", m3.getIdOmdb(), tmpMovie.getIdOmdb());
+        assertEquals("Test création 3, check movie", m3.getIdOmdb(), tmpMovie);
         assertEquals("Test création 3, check techno", rm3.getTechno().getId(), tmpTechno.getId());
         assertEquals("Test création 3, check localisation", rm3.getLocalisation().getId(),
                                                             tmpLocalisation.getId());
@@ -102,16 +103,26 @@ public class RoomMovieDAOTest extends TestCase {
         myDAO.create(rm2);
         myDAO.delete(rm2);
         assertEquals("Test deletion", null,
-                myDAO.find(rm2.getRoom().getIdRoom(), rm2.getMovie().getIdOmdb()));
+                myDAO.find(rm2.getRoom().getIdRoom(), rm2.getMovie()));
     }
 
     public void testFind() throws Exception {
         myDAO.create(rm3);
         RoomMovieModel tmp = myDAO.find(r3.getIdRoom(), m3.getIdOmdb());
-        assertEquals("Test find - check id movie",rm3.getMovie().getIdOmdb(),
-                                                  tmp.getMovie().getIdOmdb());
+        assertEquals("Test find - check id movie",rm3.getMovie(),
+                                                  tmp.getMovie());
         assertEquals("Test find - check id room",rm3.getRoom().getIdRoom(),
                                                  tmp.getRoom().getIdRoom());
+    }
+
+    public void testFindByParam() throws Exception {
+        myDAO.create(rm3);
+
+        ArrayList<RoomMovieModel> tmp = myDAO.findByTechLocNb("IMAX","VO",100);
+        assertEquals("Test find - check id movie",rm3.getMovie(),
+                tmp.get(1).getMovie());
+        assertEquals("Test find - check id room",rm3.getRoom().getIdRoom(),
+                tmp.get(1).getRoom().getIdRoom());
     }
 
 }
