@@ -27,7 +27,7 @@ public class MovieController {
         ObjectMapper mapper = new ObjectMapper();
         String s = null;
         if (movie == null) {
-            s = "{ error: bad id}";
+            s = "{ \"error\": \"bad id\"}";
         }
         else {
             try {
@@ -56,15 +56,15 @@ public class MovieController {
         System.out.println("---------");
         System.out.println("Param t:"+title+" y: "+year);
         if (title.length() == 0) {
-            s = "{ error: bad parameter, missing title}";
+            s = "{ \"error\" : \"bad parameter, missing title}\"";
         }
         else {
             if (year != 0) {movies = MovieSDK.getMoviesFromTitleYear(title,year);
             }
             else {movies = MovieSDK.getMoviesFromTitle(title);}
 
-            if (movies == null) { s = "{ error: bad values}";}
-            else if (movies.size() == 0) { s = "{ error: no movies found}";}
+            if (movies == null) { s = "{ \"error\": \"bad values\"}";}
+            else if (movies.size() == 0) { s = "{ \"error\": \"no movies found\"}";}
             else {
                 try {
                     s = mapper.writeValueAsString(movies);
