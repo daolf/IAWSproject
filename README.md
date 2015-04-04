@@ -14,22 +14,22 @@
 ### GET /movies
 
 
-| Parameter | Required | default value | description
-| --------- | -------- | ------------- |
-| t					|	yes			 | ``<empty>``	 | Movie title to search for.
-| y					|	no			 | ``<empty>``	 | Year of release.
+| Parameter | Required | default value | description |
+| --------- | -------- | ------------- |              |
+| t                 |   yes          | ``<empty>``   | Movie title to search for.|
+| y                 |   no           | ``<empty>``   | Year of release. |
 
 
 ### GET /movie/:id
 
 ### GET /movie/:id/rooms
 
-| Parameter | Required | default value | description
-| --------- | -------- | ------------- |
-| date			|	no			 | date after today	 |
-| loc 		  |	no			 | ``<empty>``	 | Localisation of the movie.
-| tech 		  |	no			 | ``<empty>``	 | ex imax
-| a 		  |	no			 |  true	 | todo
+| Parameter | Required | default value | description |
+| --------- | -------- | ------------- |             |
+| date          |   no           | date after today  |         |
+| loc         | no           | ``<empty>``   | Localisation of the movie.|
+| tech        | no           | ``<empty>``   | ex imax |
+| a             |   no           |  true           | todo    |
 
 ### GET /rooms
 ### POST /room/:id/movie
