@@ -24,12 +24,20 @@
 
 ### GET /movie/:id/rooms
 
-| Parameter | Required | default value | description |
-| --------- | -------- | ------------- | ----------  |
-| date      | no       | date after today  |         |
-| loc       | no       | ``<empty>``   | Localisation of the movie.|
-| tech      | no       | ``<empty>``   | ex imax |
-| a         | no       |  true         | todo    |
+| Parameter | Required | default value | description                      |
+| --------- | -------- | ------------- | ----------                       |
+| date      | no       | date after today  |                              |
+| loc       | no       | ``<empty>``   | Localisation of the movie.       |
+| tech      | no       | ``<empty>``   | ex imax                          |
+| a         | no       |  true         | If places are still available    |
 
 ### GET /rooms
-### POST /room/:id/movie
+
+### POST /room/:id/movie/:id
+| Parameter | Required | default value | description |
+| --------- | -------- | ------------- | ----------  |
+| date      | no       | today         |             |
+| loc       | no       | ``<empty>``   | Localisation of the movie. ("VO" ...)|
+| tech      | no       | ``<empty>``   | ex imax     |
+
+Create a movie seance where the movie referenced by his is projected in the room referenced by hid id.
