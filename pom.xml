@@ -64,6 +64,11 @@
             <artifactId>htmlunit-core-js</artifactId>
             <version>2.15</version>
         </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mrbean</artifactId>
+            <version>1.9.0</version>
+        </dependency>
     </dependencies>
 
     <build>
