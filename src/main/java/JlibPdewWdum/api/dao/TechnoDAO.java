@@ -45,4 +45,19 @@ public class TechnoDAO extends DAO<TechnoModel>{
         }
         return tmp;
     }
+
+    public TechnoModel findByInitule(String intitule) {
+        ResultSet rs = DatabaseManager.readRequest("SELECT * FROM Techno WHERE idTechno = '" + intitule + "';");
+        TechnoModel tmp = null;
+        ResultSetMetaData rm = null;
+        try {
+            rm = rs.getMetaData();
+            rs.next();
+            tmp = new TechnoModel(rs.getInt(1), rs.getString(2));
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tmp;
+    }
 }
