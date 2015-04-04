@@ -17,11 +17,11 @@ import java.util.ArrayList;
 @Path("/")
 public class MovieController {
 
-    @Path("movie")
+    @Path("movie/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getMovie(
-            @QueryParam("id") String id) {
+            @PathParam("id") String id) {
         System.out.println("---------");
         MovieModel movie = MovieSDK.getMovieFromID(id);
         ObjectMapper mapper = new ObjectMapper();
