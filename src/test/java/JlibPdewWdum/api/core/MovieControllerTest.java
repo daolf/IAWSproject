@@ -24,6 +24,6 @@ public class MovieControllerTest extends JerseyTest {
         assertEquals("Test erreur","{ error: bad id}", error);
 
         final String movie = target("/movie").queryParam("id","tt0178145").request().get(String.class);
-        assertEquals("Test id=tt0178145","{\"title\":\"Joan of Arc\",\"idOmdb\":\"tt0178145\",\"year\":1999}",movie);
+        assertEquals("{\"title\":\"Joan of Arc\",\"year\":1999,\"idOmdb\":\"tt0178145\"}",movie);
     }
 }
