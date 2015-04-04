@@ -33,6 +33,17 @@
 
 ### GET /rooms
 
+ Returns a list of rooms which match the specified criteria.
+
+| Parameter | Required | default value | description                      |
+| --------- | -------- | ------------- | ----------                       |
+| loc       | no*      | ``<empty>``   | exemple "VO"                     |
+| tech      | no*      | ``<empty>``   | ex imax                          |
+| nb        | no*      | ``<empty>``   | number total of seat in the room |
+
+``*`` at least one parameter is necessary
+
+
 ### POST /room/:id/movie/:id
 | Parameter | Required | default value | description |
 | --------- | -------- | ------------- | ----------  |
