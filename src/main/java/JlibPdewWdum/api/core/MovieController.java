@@ -9,6 +9,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by daolf on 28/03/15.
@@ -22,15 +23,15 @@ public class MovieController {
     public String getMovie(
             @QueryParam("id") String id) {
         System.out.println("---------");
-        MovieModel myMovie = MovieSDK.getMovieFromID(id);
+        MovieModel movie = MovieSDK.getMovieFromID(id);
         ObjectMapper mapper = new ObjectMapper();
         String s = null;
-        if (myMovie == null) {
+        if (movie == null) {
             s = "{ error: bad id}";
         }
         else {
             try {
-                s = mapper.writeValueAsString(myMovie);
+                s = mapper.writeValueAsString(movie);
             } catch (JsonGenerationException e) {
                 e.printStackTrace();
             } catch (JsonMappingException e) {
@@ -47,12 +48,32 @@ public class MovieController {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String getMovies(
-            @QueryParam("id") @DefaultValue("") String id,
             @QueryParam("t")  @DefaultValue("") String title,
             @QueryParam("y")  @DefaultValue("0") int year) {
+        String s = null;
+        ObjectMapper mapper = new ObjectMapper();
+        ArrayList<MovieModel> movies = new ArrayList<MovieModel>();
+        if (title == "") {
+            s = "{ error: bad parameter}";
+        }
+        else {
+            if (year != 0) {movies = MovieSDK.getMoviesFromTitleYear(title,year);
+            }
+            else {movies = MovieSDK.getMoviesFromTitle(title);}
 
-
-
-        return "YOLO2";
+            if (movies.size() == 0) { s = "{ error: no movies found}";}
+            else {
+                try {
+                    s = mapper.writeValueAsString(movies);
+                } catch (JsonGenerationException e) {
+                    e.printStackTrace();
+                } catch (JsonMappingException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return s;
     }
 }
