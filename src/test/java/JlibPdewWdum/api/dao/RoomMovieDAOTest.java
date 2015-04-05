@@ -122,6 +122,7 @@ public class RoomMovieDAOTest extends TestCase {
         assertEquals("Test taille liste",1,tmp.size());
         ArrayList<RoomMovieModel> tmp2 = myDAO.findByTechLocNb("IMAaX", "VO", 100);
         assertEquals("Test taille liste",0,tmp2.size());
+
     }
 
 }

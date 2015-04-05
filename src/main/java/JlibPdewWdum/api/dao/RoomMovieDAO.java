@@ -79,9 +79,27 @@ public class RoomMovieDAO extends DAO<RoomMovieModel> {
         return tmp;
     }
 
+    public ArrayList<RoomMovieModel> findByTechLoc(String tech,String loc) {
+        return findByTechLocNb(tech,loc,-1);
+    }
+
+    public ArrayList<RoomMovieModel> findByTechNb(String tech,int nb) {
+        return findByTechLocNb(tech,"",0);
+    }
+
+    public ArrayList<RoomMovieModel> findByTechLoc(String loc,int nb) {
+        return findByTechLocNb("",loc,nb);
+    }
+
+    public ArrayList<RoomMovieModel> findByTech(String tech) {
+        return findByTechLocNb(tech,"",-1);
+    }
+
+    public ArrayList<RoomMovieModel> findByLoc(String loc) {
+        return findByTechLocNb("",loc,-1);
+    }
 
     public ArrayList<RoomMovieModel> findByTechLocNb(String tech,String loc,int nb) {
-
         String req = "SELECT * FROM RoomMovieAssociation as R ";
         if(tech.length() != 0){req += (" INNER JOIN Techno ON (Techno.idTechno = R.idTechno AND Techno.intituleTechno = '" + tech +"')\n");}
         if(loc .length() != 0){req += (" INNER JOIN Localisation ON (Localisation.idLocalisation = R.idLocalisation AND Localisation.intituleLocalisation = '" + loc +"')\n");}
