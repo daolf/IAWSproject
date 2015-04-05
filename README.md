@@ -39,7 +39,7 @@
 | --------- | -------- | ------------- | ----------                       |
 | loc       | no*      | ``<empty>``   | exemple "VO"                     |
 | tech      | no*      | ``<empty>``   | ex imax                          |
-| nb        | no*      | ``<empty>``   | number total of seat in the room |
+| nb        | no*      | ``<empty>``   | minimum number of seat in the room |
 
 ``*`` at least one parameter is necessary
 

@@ -38,7 +38,7 @@ public class RoomController {
             myRoomMovies = myDAO.findByTechLocNb(tech,loc,nb);
         }
 
-        if(myRoomMovies.size() == 0){ s = "{ \"error\": \"no movies found\"}";}
+        if(myRoomMovies.size() == 0){ s = "{ \"error\": \"no association found\"}";}
         else {
             try {
                 s = mapper.writeValueAsString(myRoomMovies);

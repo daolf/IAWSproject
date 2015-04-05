@@ -27,11 +27,11 @@ VALUES (1, "tt0255268" ,12, "1427478108", 2, 3);
 
 -- Frozen
 INSERT INTO RoomMovieAssociation("idRoom", "idMovie", "nbPlaceUsed", "date", "idLocalisation", "idTechno")
-VALUES (1, "tt2294629" ,0, "1424378619", 2, 3);
+VALUES (3, "tt2294629" ,0, "1424378619", 2, 3);
 
 -- 50shadegrey
 INSERT INTO RoomMovieAssociation("idRoom", "idMovie", "nbPlaceUsed", "date", "idLocalisation", "idTechno")
-VALUES (1, "tt2322441" ,1, "1348172976", 2, 2);
+VALUES (4, "tt2322441" ,1, "1348172976", 2, 2);
 
 
 INSERT INTO RoomMovieAssociation("idRoom", "idMovie", "nbPlaceUsed", "date", "idLocalisation", "idTechno")

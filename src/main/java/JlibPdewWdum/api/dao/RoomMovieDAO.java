@@ -103,7 +103,7 @@ public class RoomMovieDAO extends DAO<RoomMovieModel> {
         String req = "SELECT * FROM RoomMovieAssociation as R ";
         if(tech.length() != 0){req += (" INNER JOIN Techno ON (Techno.idTechno = R.idTechno AND Techno.intituleTechno = '" + tech +"')\n");}
         if(loc .length() != 0){req += (" INNER JOIN Localisation ON (Localisation.idLocalisation = R.idLocalisation AND Localisation.intituleLocalisation = '" + loc +"')\n");}
-        if(nb != -1 ){req += (" INNER JOIN Room ON (Room.idRoom = R.idRoom AND Room.nbPlaceRoom = " + nb +")\n");}
+        if(nb != -1 ){req += (" INNER JOIN Room ON (Room.idRoom = R.idRoom AND Room.nbPlaceRoom >= " + nb +")\n");}
         req+=(";");
 
         ResultSet rs = DatabaseManager.readRequest(req);
