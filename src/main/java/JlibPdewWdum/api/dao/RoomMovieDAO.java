@@ -82,15 +82,15 @@ public class RoomMovieDAO extends DAO<RoomMovieModel> {
 
     public ArrayList<RoomMovieModel> findByTechLocNb(String tech,String loc,int nb) {
 
-        String req = "SELECT * FROM RoomMovieAssociation as R WHERE ";
-        if(tech.length() != 0){req += (" INNER JOIN Techno on (Techno.id = R.idTechno AND Techno.intituleTechno = '" + tech +"')\n");}
-        if(loc .length() != 0){req += (" INNER JOIN Localisation on (Localisation.id = R.idLocalisation AND Localisation.intituleLocalisation = '" + loc +"')\n");}
-        if(nb != -1 ){req += (" INNER JOIN Room on (Room.id = R.idRoom AND Room.nbPlaceRoom = '" + nb +"')\n");}
+        String req = "SELECT * FROM RoomMovieAssociation as R ";
+        if(tech.length() != 0){req += (" INNER JOIN Techno ON (Techno.idTechno = R.idTechno AND Techno.intituleTechno = '" + tech +"')\n");}
+        if(loc .length() != 0){req += (" INNER JOIN Localisation ON (Localisation.idLocalisation = R.idLocalisation AND Localisation.intituleLocalisation = '" + loc +"')\n");}
+        if(nb != -1 ){req += (" INNER JOIN Room ON (Room.idRoom = R.idRoom AND Room.nbPlaceRoom = " + nb +")\n");}
         req+=(";");
 
         ResultSet rs = DatabaseManager.readRequest(req);
         ArrayList<RoomMovieModel>tmp = new ArrayList<RoomMovieModel>();
-
+        RoomMovieModel tmp2;
         ResultSetMetaData rm = null;
         TechnoDAO technoDAO = new TechnoDAO();
         RoomDAO roomDAO = new RoomDAO();
@@ -100,14 +100,14 @@ public class RoomMovieDAO extends DAO<RoomMovieModel> {
         try {
             rm = rs.getMetaData();
             while (rs.next()){
-                rs.next();
-                tmp.add (new RoomMovieModel(roomDAO.find(rs.getInt(1)),
+                tmp2 = new RoomMovieModel(roomDAO.find(rs.getInt(1)),
                                             rs.getString(2),
                                             rs.getInt(3),
                                             rs.getString(4),
                                             localisationDAO.find(rs.getInt(5)),
-                                            technoDAO.find(rs.getInt(6)))
+                                            technoDAO.find(rs.getInt(6))
                 );
+                tmp.add(tmp2);
             }
             rs.close();
         } catch (SQLException e) {

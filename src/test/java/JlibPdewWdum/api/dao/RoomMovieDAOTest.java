@@ -118,11 +118,10 @@ public class RoomMovieDAOTest extends TestCase {
     public void testFindByParam() throws Exception {
         myDAO.create(rm3);
 
-        ArrayList<RoomMovieModel> tmp = myDAO.findByTechLocNb("IMAX","VO",100);
-        assertEquals("Test find - check id movie",rm3.getMovie(),
-                tmp.get(1).getMovie());
-        assertEquals("Test find - check id room",rm3.getRoom().getIdRoom(),
-                tmp.get(1).getRoom().getIdRoom());
+        ArrayList<RoomMovieModel> tmp = myDAO.findByTechLocNb("IMAX", "VO", 100);
+        assertEquals("Test taille liste",1,tmp.size());
+        ArrayList<RoomMovieModel> tmp2 = myDAO.findByTechLocNb("IMAaX", "VO", 100);
+        assertEquals("Test taille liste",0,tmp2.size());
     }
 
 }
