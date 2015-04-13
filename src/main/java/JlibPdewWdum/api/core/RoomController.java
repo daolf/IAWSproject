@@ -31,7 +31,7 @@ public class RoomController {
         String s = null;
         ArrayList<RoomMovieModel> myRoomMovies = new ArrayList<RoomMovieModel>();
 
-        if((loc.length() == 0 && tech.length() == 0) || nb == 0) {
+        if(loc.length() == 0 && tech.length() == 0 && nb == -1) {
             s = "{ \"error\" : \"bad parameter}\"";
         }
         else {
