@@ -3,13 +3,11 @@ package JlibPdewWdum.api.core;
 
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
+import org.json.JSONException;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
 import javax.ws.rs.core.Application;
-
-import static junit.framework.Assert.*;
 
 public class MovieControllerTest extends JerseyTest {
 
@@ -21,22 +19,31 @@ public class MovieControllerTest extends JerseyTest {
     @Test
     public void testGetMovie() {
         final String error = target("/movie").path("1").request().get(String.class);
-        assertEquals("Test erreur","{ \"error\": \"bad id\"}", error);
-
         final String movie = target("/movie").path("tt0178145").request().get(String.class);
-        assertEquals("{\"title\":\"Joan of Arc\",\"year\":1999,\"idOmdb\":\"tt0178145\"}",movie);
+
+        try {
+            JSONAssert.assertEquals("{ \"error\": \"bad id\"}", error, false);
+            JSONAssert.assertEquals("{\"title\":\"Joan of Arc\",\"year\":1999,\"idOmdb\":\"tt0178145\"}", movie, false);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 
 
     @Test
-    public void testGetMovies(){
-        final String errorBadParam =  target("/movies").queryParam("y","2000").request().get(String.class);
-        final String errorBadYear = target("/movies").queryParam("y","200").queryParam("t", "harry").request().get(String.class);
-        assertEquals("Test without title","{ \"error\" : \"bad parameter, missing title}\"",errorBadParam);
-        assertEquals("Test year = 200","{ \"error\": \"bad values\"}",errorBadYear);
+    public void testGetMovies() {
+        final String errorBadParam = target("/movies").queryParam("y", "2000").request().get(String.class);
+        final String errorBadYear = target("/movies").queryParam("y", "200").queryParam("t", "harry").request().get(String.class);
+        final String movies = target("/movies").queryParam("y", "2000").queryParam("t", "bibi").request().get(String.class);
+        try {
+            JSONAssert.assertEquals("{\"error\" : \"bad parameter, missing title\"}", errorBadParam, false);
+            JSONAssert.assertEquals("{\"error\": \"bad values\"}", errorBadYear, false);
+            JSONAssert.assertEquals("[{\"title\":\"Bibi &amp; Rolli - Durch dick und dünn\",\"idOmdb\":\"tt1448019\",\"year\":2000},{\"title\":\"Schwester Bibi\",\"idOmdb\":\"tt0295588\",\"year\":2000}]", movies, true);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-        final String movies = target("/movies").queryParam("y","2000").queryParam("t", "bibi").request().get(String.class);
-        assertEquals("Test year = 2000 , title = bibi","[{\"title\":\"Bibi &amp; Rolli - Durch dick und dünn\",\"idOmdb\":\"tt1448019\",\"year\":2000},{\"title\":\"Schwester Bibi\",\"idOmdb\":\"tt0295588\",\"year\":2000}]",movies);
 
     }
 }
