@@ -46,4 +46,19 @@ public class LocalisationDAO extends DAO<LocalisationModel>{
         }
         return tmp;
     }
+
+    public LocalisationModel findByName(String name) {
+        ResultSet rs = DatabaseManager.readRequest("SELECT * FROM Localisation WHERE intituleLocalisation = '" + name + "';");
+        LocalisationModel tmp = null;
+        ResultSetMetaData rm = null;
+        try {
+            rm = rs.getMetaData();
+            rs.next();
+            tmp = new LocalisationModel(rs.getInt(1), rs.getString(2));
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tmp;
+    }
 }

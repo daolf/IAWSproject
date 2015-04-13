@@ -18,7 +18,7 @@ public class RoomMovieModelTest extends TestCase {
         mm = new MovieModel("tt00","HARRY",1990);
         lm = new LocalisationModel(1,"VO");
         tm = new TechnoModel(1,"IMAX");
-        rvm = new RoomMovieModel(rm,mm,"07-06-1992",lm,tm);
+        rvm = new RoomMovieModel(rm,mm.getIdOmdb(),"07-06-1992",lm,tm);
     }
 
     @Test
@@ -36,7 +36,7 @@ public class RoomMovieModelTest extends TestCase {
         TechnoModel tm2 = new TechnoModel(2,"3D");
         rvm.setRoom(rm2);
         assertEquals("Test setRoom", rm2, rvm.getRoom());
-        rvm.setMovie(mm2);
+        rvm.setMovie(mm2.getIdOmdb());
         assertEquals("Test setMovie", mm2, rvm.getMovie());
         rvm.setDate("03-03-1992");
         assertEquals("Test setDate","03-03-1992",rvm.getDate());

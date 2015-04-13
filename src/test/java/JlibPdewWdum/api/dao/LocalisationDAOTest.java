@@ -16,6 +16,7 @@ public class LocalisationDAOTest extends TestCase {
     public LocalisationModel l1;
     public LocalisationModel l2;
     public LocalisationModel l3;
+    public LocalisationModel l4;
     public LocalisationDAO myDAO;
     public void setUp() throws Exception {
         super.setUp();
@@ -23,6 +24,8 @@ public class LocalisationDAOTest extends TestCase {
         l1 = new LocalisationModel(1,"VO");
         l2 = new LocalisationModel(2,"VOSTFR");
         l3 = new LocalisationModel(3,"VF");
+        l4 = new LocalisationModel(4,"VFff");
+
         myDAO = new LocalisationDAO();
 
 
@@ -66,5 +69,12 @@ public class LocalisationDAOTest extends TestCase {
         myDAO.create(l3);
         LocalisationModel tmp = myDAO.find(l3.getId());
         assertEquals("Test find",l3.getId(), tmp.getId());
+    }
+
+    @Test
+    public void testFindByName() {
+        myDAO.create(l4);
+        LocalisationModel tmp = myDAO.findByName(l4.getIntitule());
+        assertEquals("Test find",l4.getIntitule(), tmp.getIntitule());
     }
 }

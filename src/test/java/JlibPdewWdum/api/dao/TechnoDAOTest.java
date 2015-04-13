@@ -16,6 +16,7 @@ public class TechnoDAOTest extends TestCase {
     public TechnoModel l1;
     public TechnoModel l2;
     public TechnoModel l3;
+    public TechnoModel l4;
     public TechnoDAO myDAO;
 
     public void setUp() throws Exception {
@@ -24,6 +25,7 @@ public class TechnoDAOTest extends TestCase {
         l1 = new TechnoModel(1, "3D");
         l2 = new TechnoModel(2, "IMAX");
         l3 = new TechnoModel(3, "LEOTECHNOLOGIES");
+        l4 = new TechnoModel(4, "MIX");
         myDAO = new TechnoDAO();
 
 
@@ -67,5 +69,12 @@ public class TechnoDAOTest extends TestCase {
         myDAO.create(l3);
         TechnoModel tmp = myDAO.find(l3.getId());
         assertEquals("Test find", l3.getId(), tmp.getId());
+    }
+
+    @Test
+    public void testFindByIntitule() {
+        myDAO.create(l4);
+        TechnoModel tmp = myDAO.findByInitule(l4.getIntitule());
+        assertEquals("Test find", l4.getIntitule(), tmp.getIntitule());
     }
 }
