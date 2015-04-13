@@ -40,6 +40,7 @@ public class MovieController {
                 e.printStackTrace();
             }
         }
+
         System.out.println("---------");
         return s;
     }
@@ -56,7 +57,7 @@ public class MovieController {
         System.out.println("---------");
         System.out.println("Param t:"+title+" y: "+year);
         if (title.length() == 0) {
-            s = "{ \"error\" : \"bad parameter, missing title}\"";
+            s = "{ \"error\" : \"bad parameter, missing title\"}";
         }
         else {
             if (year != 0) {movies = MovieSDK.getMoviesFromTitleYear(title,year);
