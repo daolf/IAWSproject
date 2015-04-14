@@ -30,7 +30,7 @@ public class RoomMovieModel {
     public RoomMovieModel(RoomModel room, String movie, String date, LocalisationModel localisation, TechnoModel techno) {
         this.room = room;
         this.movie = movie;
-        if(date == "")
+        if(date.length() == 0)
             this.date = Timestamp.from(Instant.now());
         else
             this.date = Timestamp.from(Instant.ofEpochSecond(Long.valueOf(date)));
