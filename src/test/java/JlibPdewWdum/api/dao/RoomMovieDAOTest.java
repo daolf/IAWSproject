@@ -72,7 +72,7 @@ public class RoomMovieDAOTest extends TestCase {
     }
 
 
-    public void testCreate() throws Exception {
+    public void testCreate() {
         myDAO.create(rm1);
         RoomMovieModel tmp = myDAO.find(rm1.getRoom().getIdRoom(),
                                         rm1.getMovie());
@@ -99,14 +99,14 @@ public class RoomMovieDAOTest extends TestCase {
 
     }
 
-    public void testDelete() throws Exception {
+    public void testDelete() {
         myDAO.create(rm2);
         myDAO.delete(rm2);
         assertEquals("Test deletion", null,
                 myDAO.find(rm2.getRoom().getIdRoom(), rm2.getMovie()));
     }
 
-    public void testFind() throws Exception {
+    public void testFind() {
         myDAO.create(rm3);
         RoomMovieModel tmp = myDAO.find(r3.getIdRoom(), m3.getIdOmdb());
         assertEquals("Test find - check id movie",rm3.getMovie(),
@@ -115,7 +115,7 @@ public class RoomMovieDAOTest extends TestCase {
                                                  tmp.getRoom().getIdRoom());
     }
 
-    public void testFindByParam() throws Exception {
+    public void testFindByParam() {
         myDAO.create(rm3);
 
         ArrayList<RoomMovieModel> tmp = myDAO.findByTechLocNb("IMAX", "VO", 100);
