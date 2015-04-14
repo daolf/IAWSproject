@@ -1,10 +1,10 @@
 package JlibPdewWdum.api.core;
 
+import JlibPdewWdum.api.dao.LocalisationDAO;
 import JlibPdewWdum.api.dao.RoomDAO;
 import JlibPdewWdum.api.dao.RoomMovieDAO;
-import JlibPdewWdum.api.model.MovieModel;
-import JlibPdewWdum.api.model.RoomModel;
-import JlibPdewWdum.api.model.RoomMovieModel;
+import JlibPdewWdum.api.dao.TechnoDAO;
+import JlibPdewWdum.api.model.*;
 import JlibPdewWdum.api.sdkomdb.MovieSDK;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -71,7 +71,7 @@ public class RoomController {
 
         RoomDAO roomDAO = new RoomDAO();
         RoomModel room = roomDAO.find(Integer.valueOf(idRoom));
-
+        MovieModel movieModel;
         // CHECK ROOM EXISTENCE
         if (room == null)
             return "Error: This room doesn't exists.";
@@ -80,14 +80,45 @@ public class RoomController {
         if (idMovie.length() == 0 || idMovie == null) {
             return "Error: Movie ID MISSING.";
         } else { // CHECK IF THIS MOVIE EXIST
-            MovieModel movieModel = MovieSDK.getMovieFromID(idMovie);
+            movieModel = MovieSDK.getMovieFromID(idMovie);
             if(movieModel == null)
                 return "Error: This movie doesn't exists";
         }
 
-        RoomMovieModel roomMovieModel = new RoomMovieModel(room, idMovie, date);
+        LocalisationModel localisationModel = null;
+        if (loc.length() != 0)
+        {
+            // CHECK if the location exists in database
+            LocalisationDAO localisationDAO = new LocalisationDAO();
+            localisationModel = localisationDAO.findByName(loc);
+            // if not, create it in database
+            if(localisationModel == null)
+            {
+                localisationDAO.create(loc);
+                localisationModel = localisationDAO.findByName(loc);
+            }
+        }
+        TechnoModel technoModel = null;
+        if(tech.length() != 0)
+        {
+            // CHECK if the techexists in database
+            TechnoDAO technoDAO = new TechnoDAO();
+            technoModel = technoDAO.findByIntitule(tech);
+
+            // if not, create it in database
+            if(technoModel == null)
+            {
+                technoDAO.create(tech);
+                technoModel = technoDAO.findByIntitule(tech);
+            }
+
+        }
+
+        RoomMovieModel roomMovieModel = new RoomMovieModel(room, idMovie, date,
+                                                           localisationModel, technoModel);
         RoomMovieDAO dao = new RoomMovieDAO();
         dao.create(roomMovieModel);
-        return "OKAY";
+        return "Movie \"" + movieModel.getTitle() + "\" successfuly associated with" +
+                "Room N°" + roomMovieModel.getRoom().getIdRoom();
     }
 }

@@ -87,19 +87,25 @@ public class RoomControllerTest extends JerseyTest {
         RoomMovieDAO dao = new RoomMovieDAO();
 
         // add Bambi to Room 1
-        Form form = new Form();
+         Form form = new Form();
         form.add("id", "tt0034492");
         target("/room").path("1").path("movie").request().post(Entity.form(form));
         RoomMovieModel newAssociation = dao.find(1, "tt0034492");
         Assert.assertFalse(newAssociation == null);
 
         // add Se7en to Room 2
-/*        form = new Form();
+        form = new Form();
         form.add("id", "tt0114369");
         form.add("loc", "VO");
         form.add("tech", "IMAX");
         target("/room").path("2").path("movie").request().post(Entity.form(form));
-*/
+
+        // add Interstellar to Room 3 with new Loc' & tech
+        form = new Form();
+        form.add("id", "tt0816692");
+        form.add("loc", "testLocalisation0X000003");
+        form.add("tech", "testTechno0X000003");
+        target("/room").path("3").path("movie").request().post(Entity.form(form));
 
     }
 }
