@@ -74,7 +74,7 @@ public class TechnoDAOTest extends TestCase {
     @Test
     public void testFindByIntitule() {
         myDAO.create(l4);
-        TechnoModel tmp = myDAO.findByInitule(l4.getIntitule());
+        TechnoModel tmp = myDAO.findByIntitule(l4.getIntitule());
         assertEquals("Test find", l4.getIntitule(), tmp.getIntitule());
     }
 }

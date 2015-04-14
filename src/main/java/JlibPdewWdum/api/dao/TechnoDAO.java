@@ -46,8 +46,8 @@ public class TechnoDAO extends DAO<TechnoModel>{
         return tmp;
     }
 
-    public TechnoModel findByInitule(String intitule) {
-        ResultSet rs = DatabaseManager.readRequest("SELECT * FROM Techno WHERE idTechno = '" + intitule + "';");
+    public TechnoModel findByIntitule(String intitule) {
+        ResultSet rs = DatabaseManager.readRequest("SELECT * FROM Techno WHERE intituleTechno = '" + intitule + "';");
         TechnoModel tmp = null;
         ResultSetMetaData rm = null;
         try {
