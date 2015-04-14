@@ -44,9 +44,10 @@
 ``*`` at least one parameter is necessary
 
 
-### POST /room/:id/movie/:id
+### POST /room/:id/movie
 | Parameter | Required | default value | description |
 | --------- | -------- | ------------- | ----------  |
+| id        | yes      | ``<empty>``   | The id of the movie on omdb |
 | date      | no       | today         |             |
 | loc       | no       | ``<empty>``   | Localisation of the movie. ("VO" ...)|
 | tech      | no       | ``<empty>``   | ex imax     |

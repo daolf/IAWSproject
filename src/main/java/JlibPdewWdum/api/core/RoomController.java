@@ -54,4 +54,11 @@ public class RoomController {
         System.out.println("---------");
         return s;
     }
+
+    @POST
+    @Path("room/{idRoom}/movie")
+    public void postMovie (@PathParam("idRoom") String idRoom)
+    {
+        int i =9;
+    }
 }

@@ -1,12 +1,14 @@
 package JlibPdewWdum.api.core;
 
 
+import com.sun.jersey.api.representation.Form;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.json.JSONException;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Application;
 
 
@@ -38,5 +40,12 @@ public class RoomControllerTest extends JerseyTest {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void testPostMovie() {
+        Form form = new Form();
+        target("/room").path("1").path("movie").request().post(Entity.form(form));
+        
     }
 }
