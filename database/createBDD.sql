@@ -5,15 +5,15 @@ DROP TABLE IF EXISTS Room;
 DROP TABLE IF EXISTS Cinema;
 
 CREATE TABLE Cinema(
-   idCinema int PRIMARY KEY,
+   idCinema INTEGER PRIMARY KEY AUTOINCREMENT,
    titleCinema text NOT NULL,
    adressCinema text
 );
 
 CREATE TABLE Room(
-	idRoom int PRIMARY KEY,
-	idCinema int NOT NULL,
-	nbPlaceRoom int NOT NULL, 
+	idRoom INTEGER PRIMARY KEY AUTOINCREMENT,
+	idCinema INTEGER NOT NULL,
+	nbPlaceRoom INTEGER NOT NULL, 
 
 	FOREIGN KEY(idCinema) REFERENCES Cinema(idCinema)
 );
@@ -21,14 +21,14 @@ CREATE TABLE Room(
 -- INSERT INTO Room(idRoom)
 
 CREATE TABLE RoomMovieAssociation(
-	idRoom int,
+	idRoom INTEGER,
 	idMovie text,
 
-	nbPlaceUsed int DEFAULT 0,
+	nbPlaceUsed INTEGER DEFAULT 0,
 
-	date int NOT NULL,
-	idLocalisation int,
-	idTechno int,
+	date INTEGER NOT NULL,
+	idLocalisation INTEGER,
+	idTechno INTEGER,
 
 	PRIMARY KEY(idRoom, idMovie)
 	FOREIGN KEY(idRoom) REFERENCES Room(idRoom),
@@ -39,11 +39,11 @@ CREATE TABLE RoomMovieAssociation(
 
 
 CREATE TABLE Localisation(
-   idLocalisation int PRIMARY KEY,
+   idLocalisation INTEGER PRIMARY KEY AUTOINCREMENT,
    intituleLocalisation text
 );
 
 CREATE TABLE Techno(
-   idTechno int PRIMARY KEY,
+   idTechno INTEGER PRIMARY KEY AUTOINCREMENT,
    intituleTechno text
 );

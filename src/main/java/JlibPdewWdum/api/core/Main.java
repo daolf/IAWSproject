@@ -42,33 +42,7 @@ public class Main {
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
-        //Création base de données
-        DatabaseManager.env = DatabaseManager.Environment.PRODUCTION;
-        Connection c = null;
-        String aSQLScriptFilePath1 = "database/createBDD.sql";
-        String aSQLScriptFilePath2 = "database/addContent.sql";
-
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:database/bdd.db");
-
-            ScriptRunner sr = new ScriptRunner(c);
-
-            Reader readerCreate = new BufferedReader(
-                    new FileReader(aSQLScriptFilePath1));
-            Reader readerContent = new BufferedReader(
-                    new FileReader(aSQLScriptFilePath2));
-
-            // Execute script
-            sr.runScript(readerCreate);
-            sr.runScript(readerContent);
-
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
-        }
-
-
+        DatabaseManager.env = DatabaseManager.Environment.TEST;
 
         final HttpServer server = startServer();
         System.out.println(String.format("Jersey app started with WADL available at "

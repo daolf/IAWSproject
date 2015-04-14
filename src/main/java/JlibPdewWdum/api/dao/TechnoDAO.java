@@ -18,6 +18,12 @@ public class TechnoDAO extends DAO<TechnoModel>{
         return true;
     }
 
+    public boolean create(String intitule) {
+        DatabaseManager.updateRequest("INSERT INTO Techno (intituleTechno) VALUES ('"
+                + intitule + "');");
+        return true;
+    }
+
     @Override
     public boolean delete(TechnoModel obj) {
         DatabaseManager.updateRequest("DELETE FROM Techno WHERE idTechno = "

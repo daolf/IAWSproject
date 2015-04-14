@@ -19,6 +19,12 @@ public class LocalisationDAO extends DAO<LocalisationModel>{
         return true;
     }
 
+    public boolean create(String intitule) {
+        DatabaseManager.updateRequest("INSERT INTO Localisation (intituleLocalisation) VALUES ('"
+                + intitule + "');");
+        return true;
+    }
+
     @Override
     public boolean delete(LocalisationModel obj) {
         DatabaseManager.updateRequest("DELETE FROM Localisation WHERE idLocalisation = "
