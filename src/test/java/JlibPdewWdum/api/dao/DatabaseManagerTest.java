@@ -8,10 +8,7 @@ import org.junit.BeforeClass;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.Reader;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
+import java.sql.*;
 
 public class DatabaseManagerTest extends TestCase {
 
@@ -47,24 +44,29 @@ public class DatabaseManagerTest extends TestCase {
         System.out.println("Opened database successfully");
     }
 
-    public void testReadRequest() throws Exception {
+    public void testReadRequest() {
         System.out.print("Test avec SELECT * FROM Techno\n");
         ResultSet rs = DatabaseManager.readRequest("SELECT * FROM Techno");
-        ResultSetMetaData rm = rs.getMetaData();
-        assertEquals("Nb colonne",2,rm.getColumnCount());
-        assertEquals("Nom colonne 1","idTechno",rm.getColumnName(1));
-        assertEquals("Nom colonne 1", "intituleTechno", rm.getColumnName(2));
-        rs.next();
-        assertEquals("Tuple 1","1", rs.getObject(1).toString());
-        assertEquals("Tuple 1", "3D", rs.getObject(2).toString());
-        rs.next();
-        assertEquals("Tuple 2","2", rs.getObject(1).toString());
-        assertEquals("Tuple 2", "IMAX", rs.getObject(2).toString());
-        rs.close();
+        ResultSetMetaData rm = null;
+        try {
+            rm = rs.getMetaData();
+            assertEquals("Nb colonne",2,rm.getColumnCount());
+            assertEquals("Nom colonne 1","idTechno",rm.getColumnName(1));
+            assertEquals("Nom colonne 1", "intituleTechno", rm.getColumnName(2));
+            rs.next();
+            assertEquals("Tuple 1","1", rs.getObject(1).toString());
+            assertEquals("Tuple 1", "3D", rs.getObject(2).toString());
+            rs.next();
+            assertEquals("Tuple 2","2", rs.getObject(1).toString());
+            assertEquals("Tuple 2", "IMAX", rs.getObject(2).toString());
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
-    public void testupdateRequest() throws Exception {
+    public void testupdateRequest() {
 
         System.out.print("Test insertion de la Localisation d'ID 9999 et de nom \"testloc\" \n");
         String writeRequest = "INSERT INTO 'Localisation'"
@@ -75,10 +77,14 @@ public class DatabaseManagerTest extends TestCase {
 
         DatabaseManager.updateRequest(writeRequest);
         ResultSet rs = DatabaseManager.readRequest(readRequest);
-        rs.next();
-        rs.next();
-        assertEquals(rs.getInt(1), 9999);
-        assertEquals(rs.getString(2), "testloc");
-        rs.close();
+        try {
+            rs.next();
+            rs.next();
+            assertEquals(rs.getInt(1), 9999);
+            assertEquals(rs.getString(2), "testloc");
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
