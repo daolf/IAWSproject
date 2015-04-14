@@ -39,3 +39,12 @@ VALUES (1, "tt0103874" ,7, "1427478108", 2, 1);
 
 INSERT INTO RoomMovieAssociation("idRoom", "idMovie", "nbPlaceUsed", "date", "idLocalisation", "idTechno")
 VALUES (1, "tt0103854" ,7, "1427478108", 1, 2);
+
+INSERT INTO RoomMovieAssociation("idRoom", "idMovie", "nbPlaceUsed", "date")
+VALUES (1, "tt0499549" ,7, "1427478108");
+
+INSERT INTO RoomMovieAssociation("idRoom", "idMovie", "nbPlaceUsed", "date")
+VALUES (2, "tt0499549" ,7, "1427478108");
+
+INSERT INTO RoomMovieAssociation("idRoom", "idMovie", "nbPlaceUsed", "date")
+VALUES (3, "tt0499549" ,7, "1427478108");

@@ -133,4 +133,28 @@ public class RoomMovieDAO extends DAO<RoomMovieModel> {
         }
         return tmp;
     }
+
+    public ArrayList<RoomMovieModel> findByMovie(String idMovie) {
+
+        ResultSet rs = DatabaseManager.readRequest("SELECT * FROM "
+                + "RoomMovieAssociation WHERE idMovie = '" + idMovie + "';");
+        ArrayList<RoomMovieModel> tmp = new ArrayList<RoomMovieModel>();
+        RoomMovieModel tmp2;
+        ResultSetMetaData rm = null;
+        RoomDAO roomDAO = new RoomDAO();
+
+        try {
+            rm = rs.getMetaData();
+            while (rs.next()) {
+                tmp2 = new RoomMovieModel(roomDAO.find(rs.getInt(1)),
+                        rs.getString(2),
+                        rs.getString(3));
+                tmp.add(tmp2);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tmp;
+    }
 }
