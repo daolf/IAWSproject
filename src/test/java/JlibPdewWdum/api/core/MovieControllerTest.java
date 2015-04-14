@@ -39,7 +39,7 @@ public class MovieControllerTest extends JerseyTest {
         try {
             JSONAssert.assertEquals("{\"error\" : \"bad parameter, missing title\"}", errorBadParam, false);
             JSONAssert.assertEquals("{\"error\": \"bad values\"}", errorBadYear, false);
-            JSONAssert.assertEquals("[{\"title\":\"Bibi &amp; Rolli - Durch dick und dünn\",\"idOmdb\":\"tt1448019\",\"year\":2000},{\"title\":\"Schwester Bibi\",\"idOmdb\":\"tt0295588\",\"year\":2000}]", movies, true);
+            JSONAssert.assertEquals("[{\"id\": \"/movie/tt1448019\"}, {\"id\": \"/movie/tt0295588\"}]", movies, true);
         } catch (JSONException e) {
             e.printStackTrace();
         }

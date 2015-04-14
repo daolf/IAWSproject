@@ -67,15 +67,10 @@ public class MovieController {
             if (movies == null) { s = "{ \"error\": \"bad values\"}";}
             else if (movies.size() == 0) { s = "{ \"error\": \"no movies found\"}";}
             else {
-                try {
-                    s = mapper.writeValueAsString(movies);
-                } catch (JsonGenerationException e) {
-                    e.printStackTrace();
-                } catch (JsonMappingException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                s = "[";
+                for (MovieModel movie : movies)
+                    s = s + "{\"id\" :" + "\"/movie/"+movie.getIdOmdb()+"\"},";
+                s = s.substring(0, s.length()-1) + "]";
             }
         }
         System.out.println("Result : "+s);
