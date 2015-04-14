@@ -78,7 +78,7 @@ public class RoomMovieModel {
     }
 
     public void setDate(String date) {
-        this.date = Timestamp.from(Instant.parse(date));
+        this.date = Timestamp.from(Instant.ofEpochSecond(Long.parseLong(date)));
     }
 
     public LocalisationModel getLocalisation() {
