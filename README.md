@@ -1,6 +1,9 @@
 # Projet IAWS - Pierre de Wulf, Wladimir du Manoir, Jules Libert
 ## Contexte
 ## Architecture globale
+
+![alt text](https://github.com/DCLL-MDL/IAWS-JlibPdewWdum-ProjetWS/blob/master/iaws.png)
+
 ## Technologies utilisés
 ## API RESTFul
 | Endpoint | Description | 
