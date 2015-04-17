@@ -131,6 +131,16 @@ public class RoomMovieDAOTest extends TestCase {
     }
 
     public void testFindByMovie() throws Exception {
-        // TODO
+        myDAO.create(rm3);
+
+        ArrayList<RoomMovieModel> tmp = myDAO.findByMovie("tt0108648");
+        assertEquals("Test taille liste",1,tmp.size());
+        assertEquals("tt0108648", (tmp.get(0)).getMovie());
+
+        ArrayList<RoomMovieModel> tmp1 = myDAO.findByMovie("tt0000000");
+        assertEquals("Test taille liste",0,tmp1.size());
+
+        ArrayList<RoomMovieModel> tmp2 = myDAO.findByMovie("");
+        assertEquals("Test taille liste",0,tmp2.size());
     }
 }
