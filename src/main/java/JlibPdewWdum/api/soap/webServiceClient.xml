@@ -1,0 +1,7 @@
+<beans xmlns="http://www.springframework.org/schema/beans">
+
+    <bean id="webServiceClient" class="JlibPdewWdum.api.soap.WebServiceClient">
+        <property name="defaultUri" value="http://localhost:8080/myapp"/>
+    </bean>
+
+</beans>
