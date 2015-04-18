@@ -2,22 +2,52 @@
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://localhost:8080/myapp/soap" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="MovieRequest" type="soap:MovieRequestType" xmlns:soap="http://localhost:8080/myapp/soap"/>
   <xs:complexType name="MovieRequestType">
-    <xs:sequence>
+    <xs:all>
       <xs:element type="soap:MovieType" name="Movie" xmlns:soap="http://localhost:8080/myapp/soap"/>
       <xs:element type="soap:RoomMovieType" name="RoomMovie" xmlns:soap="http://localhost:8080/myapp/soap"/>
-    </xs:sequence>
+    </xs:all>
   </xs:complexType>
   <xs:complexType name="RoomMovieType">
     <xs:sequence>
-      <xs:element type="xs:string" name="IdRoom"/>
-      <xs:element type="xs:string" name="Idomdb"/>
-      <xs:element type="xs:string" name="Techno"/>
-      <xs:element type="xs:string" name="Localisation"/>
+      <xs:element type="xs:integer" name="IdRoom"/>
+      <xs:element name="Idomdb">
+          <xs:simpleType>
+              <xs:restriction base="xs:string">
+                  <xs:pattern value="tt[0-9]{7}"/>
+              </xs:restriction>
+          </xs:simpleType>
+      </xs:element>
+      <xs:element name="Techno">
+          <xs:simpleType>
+              <xs:restriction base="xs:string">
+                  <xs:enumeration value="VO"/>
+                  <xs:enumeration value="VF"/>
+                  <xs:enumeration value="VOSTFR"/>
+                  <xs:enumeration value="VOST"/>
+                  <xs:enumeration value="VOSTPKSTAN"/>
+              </xs:restriction>
+          </xs:simpleType>
+      </xs:element>
+      <xs:element name="Localisation">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="3D"/>
+                <xs:enumeration value="IMAX"/>
+                <xs:enumeration value="LEOTECHNOLOGIES"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="MovieType">
     <xs:sequence>
-      <xs:element type="xs:string" name="Idomdb"/>
+        <xs:element name="Idomdb">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="tt[0-9]{7}"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:element>
     </xs:sequence>
   </xs:complexType>
 </xs:schema>
