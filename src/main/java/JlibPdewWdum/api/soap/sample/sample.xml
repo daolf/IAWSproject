@@ -1,0 +1,11 @@
+<MovieRequest xmlns="http://localhost:8080/myapp/soap">
+    <Movie>
+        <Idomdb>tt1234567898</Idomdb>
+    </Movie>
+    <RoomMovie>
+        <IdRoom>1</IdRoom>
+        <Idomdb>tt1234566898</Idomdb>
+        <Techno>IMAX</Techno>
+        <Localisation>VO</Localisation>
+    </RoomMovie>
+</MovieRequest>
