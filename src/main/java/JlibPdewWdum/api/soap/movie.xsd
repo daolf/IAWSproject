@@ -17,8 +17,8 @@
               </xs:restriction>
           </xs:simpleType>
       </xs:element>
-      <xs:element type="xs:string" name="Localisation" \>
-      <xs:element type="xs:string" name="Techno"\>
+      <xs:element type="xs:string" name="Localisation" />
+      <xs:element type="xs:string" name="Techno"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="MovieType">
