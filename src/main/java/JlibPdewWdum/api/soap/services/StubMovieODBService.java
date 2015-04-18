@@ -11,7 +11,17 @@ import org.springframework.stereotype.Service;
 public class StubMovieODBService implements MovieODBService {
 
     @Override
-    public void getMovies(String idomdb) {
-        System.out.println("Idomdb=" + idomdb);
+    public void FindByMovie(String idomdb) {
+       System.out.println("Idomdb=" + idomdb);
+    }
+
+    @Override
+    public void FindByTechno(String techno) {
+        System.out.println("Techno=" + techno);
+    }
+
+    @Override
+    public void FindByLocalisation(String localisation) {
+        System.out.println("Localistion=" + localisation);
     }
 }

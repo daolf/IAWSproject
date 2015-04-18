@@ -6,5 +6,9 @@ package JlibPdewWdum.api.soap.services;
  * Created by Wladimir du Manoir, droit on 18/04/15.
  */
 public interface MovieODBService {
-    void getMovies(String idomdb);
+    void FindByMovie(String idomdb);
+
+    void FindByTechno(String techno);
+
+    void FindByLocalisation(String localisation);
 }
