@@ -1,12 +1,20 @@
 package JlibPdewWdum.soap;
 
+import JlibPdewWdum.api.dao.RoomMovieDAO;
+import JlibPdewWdum.api.model.MovieModel;
+import JlibPdewWdum.api.model.RoomModel;
+import JlibPdewWdum.api.model.RoomMovieModel;
+import JlibPdewWdum.api.sdkomdb.MovieSDK;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
+import java.util.ArrayList;
+
 /**
- * Created by jlibert on 19/04/2015.
+ *
+ *
  */
 
 @Endpoint
@@ -15,15 +23,28 @@ public class MovieEndpoint {
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getRoomsRequest")
     @ResponsePayload
-    public RoomsResponse getCountry(@RequestPayload RoomsRequest request) {
+    public RoomsResponse getRooms(@RequestPayload RoomsRequest request) {
         RoomsResponse response = new RoomsResponse();
-        //response.setCountry(countryRepository.findCountry(request.getName()));
-        response.setIdOmdb("tt0987654");
-        RoomsResponse.Room room = new RoomsResponse.Room();
-        room.setIdRoom("1");
-        room.setLocalisation("VOSTFR");
-        room.setTechno("IMAX");
-        response.room.add(room);
+        MovieModel movieModel = null;
+
+        response.setIdOmdb(request.getIdOmdb());
+        String id = request.getIdOmdb();
+        try {
+            movieModel = MovieSDK.getMovieFromID(id);
+        } catch (Exception e) {}
+        if (movieModel != null) {
+            RoomMovieDAO roomMovieDAO = new RoomMovieDAO();
+            ArrayList<RoomMovieModel> associations = roomMovieDAO.findByMovie(id);
+            if (associations != null) {
+                    RoomsResponse.Room room = new RoomsResponse.Room();
+                    for (RoomMovieModel association : associations) {
+                        room.setIdRoom(Integer.toString(association.getRoom().getIdRoom()));
+                        room.setLocalisation((association.getLocalisation()).toString());
+                        room.setTechno((association.getTechno()).toString());
+                        response.room.add(room);
+                    }
+                }
+            }
         return response;
     }
 }
