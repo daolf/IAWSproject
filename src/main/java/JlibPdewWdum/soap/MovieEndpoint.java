@@ -11,7 +11,7 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 @Endpoint
 public class MovieEndpoint {
-    private static final String NAMESPACE_URI = "http://localhost:8080/soap";
+    private static final String NAMESPACE_URI = "http://JlibPdewWdum/soap/";
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getRoomsRequest")
     @ResponsePayload
