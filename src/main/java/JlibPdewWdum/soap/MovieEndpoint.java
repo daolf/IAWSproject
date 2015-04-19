@@ -18,7 +18,12 @@ public class MovieEndpoint {
     public RoomsResponse getCountry(@RequestPayload RoomsRequest request) {
         RoomsResponse response = new RoomsResponse();
         //response.setCountry(countryRepository.findCountry(request.getName()));
-
+        response.setIdOmdb("tt0987654");
+        RoomsResponse.Room room = new RoomsResponse.Room();
+        room.setIdRoom("1");
+        room.setLocalisation("VOSTFR");
+        room.setTechno("IMAX");
+        response.room.add(room);
         return response;
     }
 }
