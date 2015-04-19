@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:movie="http://JlibPdewWdum/soap/"
+           targetNamespace="http://JlibPdewWdum/soap/"
+           elementFormDefault="qualified">
+
+    <xs:element name="RoomsRequest" type="movie:RoomsRequest"/>
+    <xs:element name="RoomsResponse" type="movie:RoomsResponse"/>
+
+    <xs:complexType name="RoomsRequest">
+        <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="1" name="idOmdb"
+                        type="movie:idOmdbType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="idOmdbType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="tt[0-9]{7}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="RoomsResponse">
+        <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="1" name="idOmdb"
+                        type="movie:idOmdbType"/>
+            <xs:element name="Room" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element type="xs:string" name="idRoom"/>
+                        <xs:element type="xs:string" name="techno"/>
+                        <xs:element type="xs:string" name="localisation"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
