@@ -142,6 +142,8 @@ public class RoomMovieDAO extends DAO<RoomMovieModel> {
         RoomMovieModel tmp2;
         ResultSetMetaData rm = null;
         RoomDAO roomDAO = new RoomDAO();
+        LocalisationDAO localisationDA0 = new LocalisationDAO();
+        TechnoDAO technoDAO = new TechnoDAO();
 
         try {
             rm = rs.getMetaData();
@@ -150,10 +152,9 @@ public class RoomMovieDAO extends DAO<RoomMovieModel> {
                 tmp2 = new RoomMovieModel(roomDAO.find(rs.getInt(1)),
                         rs.getString(2),
                         rs.getString(3),
-                        //FIXME
-                        new LocalisationModel(1,rs.getString(4)),
-                        new TechnoModel(3,rs.getString(5)));
-                tmp.add(tmp2);
+                        localisationDA0.find(rs.getInt(4)),
+                        technoDAO.find(rs.getInt(5)));
+                        tmp.add(tmp2);
             }
             rs.close();
         } catch (SQLException e) {
