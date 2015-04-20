@@ -3,13 +3,10 @@ package JlibPdewWdum.api.core;
 
 import JlibPdewWdum.api.dao.DatabaseManager;
 import JlibPdewWdum.api.dao.DatabaseUtils;
-import JlibPdewWdum.api.dao.RoomDAO;
 import JlibPdewWdum.api.dao.RoomMovieDAO;
-import JlibPdewWdum.api.model.RoomModel;
 import JlibPdewWdum.api.model.RoomMovieModel;
 import com.sun.jersey.api.representation.Form;
 import junit.framework.Assert;
-import org.apache.ibatis.jdbc.ScriptRunner;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.json.JSONException;
@@ -18,11 +15,6 @@ import org.skyscreamer.jsonassert.JSONAssert;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Application;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.Reader;
-import java.sql.Connection;
-import java.sql.DriverManager;
 
 
 public class RoomControllerTest extends JerseyTest {
@@ -44,13 +36,13 @@ public class RoomControllerTest extends JerseyTest {
     @Test
     public void testGetRooms() {
         String roomsVOTest = target("/rooms").queryParam("loc", "VO").request().get(String.class);
-        String roomsVOOriginal = "[{\"room\":{\"idRoom\":1,\"cinema\":\"+path+\"/cinema/2,\"nbPlaceRoom\":100},\"movie\":\"tt0103854\",\"nbPlaceUsed\":7,\"date\":1427478108000,\"localisation\":{\"id\":1,\"intitule\":\"VO\"},\"techno\":{\"id\":2,\"intitule\":\"IMAX\"}}]";
+        String roomsVOOriginal = "[{\"room\":\"http://localhost:8080/myapp/room/1\",\"movie\":\"http://localhost:8080/myapp/movie/tt0103854\",\"nbPlaceUsed\":7,\"date\":\"2015-03-27 18:41:48.0\",\"localisation\":\"VO\",\"technologie\":\"IMAX\"}]";
 
         String roomsErrorTest = target("/rooms").queryParam("loc", "VOUZBEKISTAN").request().get(String.class);
         String roomsErrorOriginal = "{ \"error\": \"no association found\"}";
 
         String roomsIMAXTest = target("/rooms").queryParam("tech", "IMAX").request().get(String.class);
-        String roomsIMAXOriginal = "[{\"room\":{\"idRoom\":4,\"cinema\":"+path+"/cinema/2,\"nbPlaceRoom\":402},\"movie\":\"tt2322441\",\"nbPlaceUsed\":1,\"date\":1348172976000,\"localisation\":{\"id\":2,\"intitule\":\"VF\"},\"techno\":{\"id\":2,\"intitule\":\"IMAX\"}},{\"room\":{\"idRoom\":1,\"idCinema\":2,\"nbPlaceRoom\":100},\"movie\":\"tt0103854\",\"nbPlaceUsed\":7,\"date\":1427478108000,\"localisation\":{\"id\":1,\"intitule\":\"VO\"},\"techno\":{\"id\":2,\"intitule\":\"IMAX\"}}]";
+        String roomsIMAXOriginal = "[{\"room\":\"http://localhost:8080/myapp/room/4\",\"movie\":\"http://localhost:8080/myapp/movie/tt2322441\",\"nbPlaceUsed\":1,\"date\":\"2012-09-20 22:29:36.0\",\"localisation\":\"VF\",\"technologie\":\"IMAX\"},{\"room\":\"http://localhost:8080/myapp/room/1\",\"movie\":\"http://localhost:8080/myapp/movie/tt0103854\",\"nbPlaceUsed\":7,\"date\":\"2015-03-27 18:41:48.0\",\"localisation\":\"VO\",\"technologie\":\"IMAX\"}]";
 
         String roomsWrongParamTest = target("/rooms").queryParam("localocaloca", "VO").request().get(String.class);
         String roomsWrongParamOriginal = "{ \"error\": \"no association found\"}";
@@ -70,7 +62,7 @@ public class RoomControllerTest extends JerseyTest {
         RoomMovieDAO dao = new RoomMovieDAO();
 
         // add Bambi to Room 1
-         Form form = new Form();
+        Form form = new Form();
         form.add("id", "tt0034492");
         target("/room").path("1").path("movie").request().post(Entity.form(form));
         RoomMovieModel newAssociation = dao.find(1, "tt0034492");
@@ -93,7 +85,7 @@ public class RoomControllerTest extends JerseyTest {
     }
 
     @Test
-    public void testGetRoomById(){
+    public void testGetRoomById() {
 
         String roomWrongParam = target("/room").path("100").request().get(String.class);
         String roomWrongParamOriginal = "{ \"error\": \"this room does not exist\"}";
