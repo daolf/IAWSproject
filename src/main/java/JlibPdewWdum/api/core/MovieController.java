@@ -61,7 +61,7 @@ public class MovieController {
         if (movieModel != null) {
             RoomMovieDAO roomMovieDAO = new RoomMovieDAO();
             ArrayList<RoomMovieModel> associations = roomMovieDAO.findByMovie(id);
-            if (associations != null) {
+            if (associations != null && associations.size()!= 0) {
 
                 ArrayList<RoomModel> list = new ArrayList<RoomModel>();
                 for (RoomMovieModel association : associations) {
