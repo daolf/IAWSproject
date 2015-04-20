@@ -19,6 +19,8 @@ import java.sql.DriverManager;
 
 public class MovieControllerTest extends JerseyTest {
 
+    public static final String path = "http://localhost:8080/myapp";
+
     public void setUp() throws Exception {
         super.setUp();
         DatabaseUtils.initDB(DatabaseManager.Environment.TEST, true);
@@ -69,7 +71,7 @@ public class MovieControllerTest extends JerseyTest {
 
         // tt0499549 -> Avatar in rooms: 1, 2 & 3
         final String goodMovieWithRooms = target("/movie").path("tt0499549").path("rooms").request().get(String.class);
-        final String goodMovieWithRoomsContract = "[{\"room\": \"/room/1\"}, {\"room\": \"/room/2\"}, {\"room\": \"/room/3\"}]";
+        final String goodMovieWithRoomsContract = "[{\"nbPlace\":100,\"idRoom\":\"1\",\"cinema\":\"http://localhost:8080/myapp/cinema/2\"}, {\"nbPlace\":200,\"idRoom\":\"2\",\"cinema\":\"http://localhost:8080/myapp/cinema/2\"}, {\"nbPlace\":300,\"idRoom\":\"3\",\"cinema\":\"http://localhost:8080/myapp/cinema/2\"}]";
 
         try {
             JSONAssert.assertEquals(errorWrongMovie, errorWrongMovieContract, false);

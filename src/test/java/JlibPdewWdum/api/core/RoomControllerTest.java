@@ -25,6 +25,8 @@ import java.sql.DriverManager;
 
 public class RoomControllerTest extends JerseyTest {
 
+    public static final String path = "http://localhost:8080/myapp";
+
     public void setUp() throws Exception {
         super.setUp();
         DatabaseUtils.initDB(DatabaseManager.Environment.TEST, true);
@@ -40,13 +42,13 @@ public class RoomControllerTest extends JerseyTest {
     @Test
     public void testGetRooms() {
         String roomsVOTest = target("/rooms").queryParam("loc", "VO").request().get(String.class);
-        String roomsVOOriginal = "[{\"room\":{\"idRoom\":1,\"idCinema\":2,\"nbPlaceRoom\":100},\"movie\":\"tt0103854\",\"nbPlaceUsed\":7,\"date\":1427478108000,\"localisation\":{\"id\":1,\"intitule\":\"VO\"},\"techno\":{\"id\":2,\"intitule\":\"IMAX\"}}]";
+        String roomsVOOriginal = "[{\"room\":{\"idRoom\":1,\"cinema\":\"+path+\"/cinema/2,\"nbPlaceRoom\":100},\"movie\":\"tt0103854\",\"nbPlaceUsed\":7,\"date\":1427478108000,\"localisation\":{\"id\":1,\"intitule\":\"VO\"},\"techno\":{\"id\":2,\"intitule\":\"IMAX\"}}]";
 
         String roomsErrorTest = target("/rooms").queryParam("loc", "VOUZBEKISTAN").request().get(String.class);
         String roomsErrorOriginal = "{ \"error\": \"no association found\"}";
 
         String roomsIMAXTest = target("/rooms").queryParam("tech", "IMAX").request().get(String.class);
-        String roomsIMAXOriginal = "[{\"room\":{\"idRoom\":4,\"idCinema\":2,\"nbPlaceRoom\":402},\"movie\":\"tt2322441\",\"nbPlaceUsed\":1,\"date\":1348172976000,\"localisation\":{\"id\":2,\"intitule\":\"VF\"},\"techno\":{\"id\":2,\"intitule\":\"IMAX\"}},{\"room\":{\"idRoom\":1,\"idCinema\":2,\"nbPlaceRoom\":100},\"movie\":\"tt0103854\",\"nbPlaceUsed\":7,\"date\":1427478108000,\"localisation\":{\"id\":1,\"intitule\":\"VO\"},\"techno\":{\"id\":2,\"intitule\":\"IMAX\"}}]";
+        String roomsIMAXOriginal = "[{\"room\":{\"idRoom\":4,\"cinema\":"+path+"/cinema/2,\"nbPlaceRoom\":402},\"movie\":\"tt2322441\",\"nbPlaceUsed\":1,\"date\":1348172976000,\"localisation\":{\"id\":2,\"intitule\":\"VF\"},\"techno\":{\"id\":2,\"intitule\":\"IMAX\"}},{\"room\":{\"idRoom\":1,\"idCinema\":2,\"nbPlaceRoom\":100},\"movie\":\"tt0103854\",\"nbPlaceUsed\":7,\"date\":1427478108000,\"localisation\":{\"id\":1,\"intitule\":\"VO\"},\"techno\":{\"id\":2,\"intitule\":\"IMAX\"}}]";
 
         String roomsWrongParamTest = target("/rooms").queryParam("localocaloca", "VO").request().get(String.class);
         String roomsWrongParamOriginal = "{ \"error\": \"no association found\"}";
