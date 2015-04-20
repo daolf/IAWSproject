@@ -1,11 +1,16 @@
 package JlibPdewWdum.api.model;
 
+import JlibPdewWdum.api.serializer.RoomMovieModelSerializer;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import java.sql.Timestamp;
 import java.time.Instant;
 
 /**
  * Created by daolf on 02/04/15.
  */
+@JsonSerialize(using = RoomMovieModelSerializer.class)
 public class RoomMovieModel {
     private RoomModel room;
     private String movie;

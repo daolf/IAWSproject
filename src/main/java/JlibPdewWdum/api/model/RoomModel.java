@@ -1,8 +1,14 @@
 package JlibPdewWdum.api.model;
 
+import JlibPdewWdum.api.serializer.RoomModelSerializer;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 /**
  * Created by jlibert on 01/04/2015.
  */
+
+@JsonSerialize(using = RoomModelSerializer.class)
 public class RoomModel {
 
     private int idRoom;

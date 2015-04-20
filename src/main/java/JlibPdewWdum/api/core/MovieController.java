@@ -51,9 +51,10 @@ public class MovieController {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String getRoomsFromMovie(
-            @PathParam("id") String id) {
+            @PathParam("id") String id) throws IOException {
         String s = "{\"error\" : \"There is no room playing this movie, sorry !\"}";
         MovieModel movieModel = null;
+        ObjectMapper mapper = new ObjectMapper();
         try {
             movieModel = MovieSDK.getMovieFromID(id);
         } catch (Exception e) {}
@@ -62,14 +63,13 @@ public class MovieController {
             ArrayList<RoomMovieModel> associations = roomMovieDAO.findByMovie(id);
             if (associations != null) {
 
-                s = "[";
+                ArrayList<RoomModel> list = new ArrayList<RoomModel>();
                 for (RoomMovieModel association : associations) {
                     RoomModel actualRoom = association.getRoom();
-                    s = s + "{";
-                    s = s + "\"room\" : " + "\"/room/" + actualRoom.getIdRoom() + "\"";
-                    s = s + "},";
+                    list.add(actualRoom);
                 }
-                s = s.substring(0, s.length() - 1) + "]";
+
+                s = mapper.writeValueAsString(list);
             }
         }
 

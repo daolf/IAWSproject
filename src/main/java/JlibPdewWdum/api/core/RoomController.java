@@ -121,4 +121,22 @@ public class RoomController {
         return "Movie \"" + movieModel.getTitle() + "\" successfuly associated with" +
                 "Room N°" + roomMovieModel.getRoom().getIdRoom();
     }
+
+    @GET
+    @Path("room/{idRoom}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public String getRoom(@PathParam("idRoom") @DefaultValue("") String idRoom) throws IOException {
+
+        RoomDAO roomDAO = new RoomDAO();
+        RoomModel room = roomDAO.find(Integer.valueOf(idRoom));
+        ObjectMapper mapper = new ObjectMapper();
+        String s = null;
+        if (room != null) {
+            s = mapper.writeValueAsString(room);
+        } else {
+            s = "{ \"error\": \"this room does not exist\"}";
+        }
+        return s;
+    }
 }
