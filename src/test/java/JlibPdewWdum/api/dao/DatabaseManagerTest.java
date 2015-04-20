@@ -59,7 +59,6 @@ public class DatabaseManagerTest extends TestCase {
             assertEquals(rs.getString(2), "testloc");
             rs.close();
         } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 }

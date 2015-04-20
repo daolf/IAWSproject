@@ -45,7 +45,6 @@ public class RoomDAO extends DAO<RoomModel> {
                                 rs.getInt(3));
             rs.close();
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return tmp;
     }
