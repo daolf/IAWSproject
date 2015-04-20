@@ -2,8 +2,15 @@ package JlibPdewWdum.soap;
 
 import JlibPdewWdum.api.dao.DatabaseManager;
 import junit.framework.TestCase;
+import org.apache.ibatis.jdbc.ScriptRunner;
 import org.junit.Test;
 import org.springframework.boot.SpringApplication;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.Reader;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 /**
  * Created by droit on 20/04/15.
@@ -15,8 +22,33 @@ public class MovieEndpointTest extends TestCase {
     private RoomsRequest roomsRequestKO;
 
     public void setUp() throws Exception {
-        String[] args = {""};
-        Application.main(args);
+        super.setUp();
+        // dbb init
+        DatabaseManager.env = DatabaseManager.Environment.TEST;
+        Connection c = null;
+        String aSQLScriptFilePath1 = "database/createBDD.sql";
+        String aSQLScriptFilePath2 = "database/addContent.sql";
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:database/test.db");
+
+            ScriptRunner sr = new ScriptRunner(c);
+
+            Reader readerCreate = new BufferedReader(
+                    new FileReader(aSQLScriptFilePath1));
+            Reader readerContent = new BufferedReader(
+                    new FileReader(aSQLScriptFilePath2));
+
+            // Execute script
+            sr.runScript(readerCreate);
+            sr.runScript(readerContent);
+
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+
         //create request
         roomsResponse = new RoomsResponse();
         movieEndpoint = new MovieEndpoint();
