@@ -9,7 +9,6 @@ import java.sql.SQLException;
 
 public class DatabaseManagerTest extends TestCase {
 
-    // TODO INIT NEW DATABASE
     @Before
     public void setUp() throws Exception {
         super.setUp();

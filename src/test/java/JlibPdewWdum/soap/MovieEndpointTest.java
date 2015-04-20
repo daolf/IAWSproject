@@ -104,6 +104,4 @@ public class MovieEndpointTest extends TestCase {
         roomsResponse = movieEndpoint.getRooms(roomsRequestKO);
         assertEquals("Test room of roomsResponse size", roomsResponse.room.size(), 0);
     }
-
-    //TODO limits cases ?
 }

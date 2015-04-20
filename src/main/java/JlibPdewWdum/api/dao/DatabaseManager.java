@@ -10,7 +10,6 @@ import java.sql.Statement;
  */
 public class DatabaseManager {
     private static final String sJdbc = "jdbc:sqlite";
-    //TODO a changer en fonction de votre machine
     private static final String dbProductionLocation = "database/bdd.db";
     private static final String dbTestLocation = "database/test.db";
 
