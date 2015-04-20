@@ -1,0 +1,9 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+				  xmlns:movie="http://JlibPdewWdum/soap">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <movie:RoomsRequest>
+         <movie:idOmdb>tt0585642</movie:idOmdb>
+      </movie:RoomsRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

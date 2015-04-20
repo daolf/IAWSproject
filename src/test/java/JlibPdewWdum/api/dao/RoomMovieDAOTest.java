@@ -3,6 +3,7 @@ package JlibPdewWdum.api.dao;
 import JlibPdewWdum.api.model.*;
 import junit.framework.TestCase;
 import org.apache.ibatis.jdbc.ScriptRunner;
+import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -99,7 +100,7 @@ public class RoomMovieDAOTest extends TestCase {
         assertEquals("Test taille liste",1,tmp.size());
         ArrayList<RoomMovieModel> tmp2 = myDAO.findByTechLocNb("IMAaX", "VO", 100);
         assertEquals("Test taille liste",0,tmp2.size());
-        ArrayList<RoomMovieModel> tmp3 = new ArrayList<>();
+        ArrayList<RoomMovieModel> tmp3 =  new ArrayList<RoomMovieModel>();
         tmp3 = myDAO.findByLoc("VF");
         assertEquals("Test VF",4,tmp3.size());
         tmp3 = myDAO.findByTech("IMAX");
@@ -107,17 +108,19 @@ public class RoomMovieDAOTest extends TestCase {
 
     }
 
+    @Test
     public void testFindByMovie() throws Exception {
+
         myDAO.create(rm3);
+        ArrayList<RoomMovieModel> tmp = myDAO.findByMovie(rm3.getMovie());
+        assertEquals("Test find - check list size",1,tmp.size());
+        assertEquals("Test find - check id movie","tt0108648",tmp.get(0).getMovie());
+        assertEquals("Test find - check localisation",3,tmp.get(0).getLocalisation().getId());
+        assertEquals("Test find - check localisation","VOSTFR",tmp.get(0).getLocalisation().getIntitule());
+        assertEquals("Test find - check techno",1,tmp.get(0).getTechno().getId());
+        assertEquals("Test find - check techno","3D",tmp.get(0).getTechno().getIntitule());
 
-        ArrayList<RoomMovieModel> tmp = myDAO.findByMovie("tt0108648");
-        assertEquals("Test taille liste",1,tmp.size());
-        assertEquals("tt0108648", (tmp.get(0)).getMovie());
-
-        ArrayList<RoomMovieModel> tmp1 = myDAO.findByMovie("tt0000000");
-        assertEquals("Test taille liste",0,tmp1.size());
-
-        ArrayList<RoomMovieModel> tmp2 = myDAO.findByMovie("");
-        assertEquals("Test taille liste",0,tmp2.size());
+        ArrayList<RoomMovieModel> tmp1 = myDAO.findByMovie("tt1111111");
+        assertEquals("Test no movie",0,tmp1.size());
     }
 }
