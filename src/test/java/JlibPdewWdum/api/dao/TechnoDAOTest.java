@@ -21,34 +21,16 @@ public class TechnoDAOTest extends TestCase {
 
     public void setUp() throws Exception {
         super.setUp();
-        DatabaseManager.env = DatabaseManager.Environment.TEST;
+        DatabaseUtils.initDB(DatabaseManager.Environment.TEST, false);
+
         l1 = new TechnoModel(1, "3D");
         l2 = new TechnoModel(2, "IMAX");
         l3 = new TechnoModel(3, "LEOTECHNOLOGIES");
         l4 = new TechnoModel(4, "MIX");
         myDAO = new TechnoDAO();
-
-
-        Connection c = null;
-        String aSQLScriptFilePath1 = "database/createBDD.sql";
-
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:database/test.db");
-
-            ScriptRunner sr = new ScriptRunner(c);
-
-            Reader readerCreate = new BufferedReader(
-                    new FileReader(aSQLScriptFilePath1));
-
-            // Execute script
-            sr.runScript(readerCreate);
-
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
-        }
     }
+
+
 
     @Test
     public void testCreate() {

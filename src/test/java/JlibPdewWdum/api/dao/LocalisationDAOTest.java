@@ -20,34 +20,14 @@ public class LocalisationDAOTest extends TestCase {
     public LocalisationDAO myDAO;
     public void setUp() throws Exception {
         super.setUp();
-        DatabaseManager.env = DatabaseManager.Environment.TEST;
+        DatabaseUtils.initDB(DatabaseManager.Environment.TEST, false);
+
         l1 = new LocalisationModel(1,"VO");
         l2 = new LocalisationModel(2,"VOSTFR");
         l3 = new LocalisationModel(3,"VF");
         l4 = new LocalisationModel(4,"VFff");
 
         myDAO = new LocalisationDAO();
-
-
-        Connection c = null;
-        String aSQLScriptFilePath1 = "database/createBDD.sql";
-
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:database/test.db");
-
-            ScriptRunner sr = new ScriptRunner(c);
-
-            Reader readerCreate = new BufferedReader(
-                    new FileReader(aSQLScriptFilePath1));
-
-            // Execute script
-            sr.runScript(readerCreate);
-
-        } catch ( Exception e ) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
-        }
     }
 
     @Test

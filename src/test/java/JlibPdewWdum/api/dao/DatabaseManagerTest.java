@@ -16,32 +16,7 @@ public class DatabaseManagerTest extends TestCase {
     @Before
     public void setUp() throws Exception {
         super.setUp();
-        DatabaseManager.env = DatabaseManager.Environment.TEST;
-
-        System.out.print("Init test db\n");
-        Connection c = null;
-        String aSQLScriptFilePath1 = "database/createBDD.sql";
-        String aSQLScriptFilePath2 = "database/addContent.sql";
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:database/test.db");
-
-            ScriptRunner sr = new ScriptRunner(c);
-
-            Reader readerCreate = new BufferedReader(
-                    new FileReader(aSQLScriptFilePath1));
-            Reader readerContent = new BufferedReader(
-                    new FileReader(aSQLScriptFilePath2));
-
-            // Execute script
-            sr.runScript(readerCreate);
-            sr.runScript(readerContent);
-
-        } catch ( Exception e ) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
-        }
-        System.out.println("Opened database successfully");
+        DatabaseUtils.initDB(DatabaseManager.Environment.TEST, true);
     }
 
     public void testReadRequest() {

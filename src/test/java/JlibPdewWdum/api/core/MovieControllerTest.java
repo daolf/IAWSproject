@@ -2,6 +2,7 @@ package JlibPdewWdum.api.core;
 
 
 import JlibPdewWdum.api.dao.DatabaseManager;
+import JlibPdewWdum.api.dao.DatabaseUtils;
 import org.apache.ibatis.jdbc.ScriptRunner;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
@@ -20,30 +21,7 @@ public class MovieControllerTest extends JerseyTest {
 
     public void setUp() throws Exception {
         super.setUp();
-        DatabaseManager.env = DatabaseManager.Environment.TEST;
-        Connection c = null;
-        String aSQLScriptFilePath1 = "database/createBDD.sql";
-        String aSQLScriptFilePath2 = "database/addContent.sql";
-
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:database/test.db");
-
-            ScriptRunner sr = new ScriptRunner(c);
-
-            Reader readerCreate = new BufferedReader(
-                    new FileReader(aSQLScriptFilePath1));
-            Reader readerContent = new BufferedReader(
-                    new FileReader(aSQLScriptFilePath2));
-
-            // Execute script
-            sr.runScript(readerCreate);
-            sr.runScript(readerContent);
-
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
-        }
+        DatabaseUtils.initDB(DatabaseManager.Environment.TEST, true);
     }
 
 
