@@ -99,7 +99,7 @@ public class RoomControllerTest extends JerseyTest {
         String roomWrongParamOriginal = "{ \"error\": \"this room does not exist\"}";
 
         String roomGoodParam = target("/room").path("1").request().get(String.class);
-        String roomGoodParamOriginal = "";
+        String roomGoodParamOriginal = "{\"idRoom\":\"1\",\"cinema\":\"http://localhost:8080/myapp/cinema/2\",\"nbPlace\":100}";
 
         try {
             JSONAssert.assertEquals(roomWrongParam, roomWrongParamOriginal, false);
