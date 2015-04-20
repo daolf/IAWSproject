@@ -5,7 +5,7 @@ Project realized for University Toulouse III Paul Sabatier in Interoperability a
 
 ## Global architecture
 
-![alt text](https://github.com/DCLL-MDL/IAWS-JlibPdewWdum-ProjetWS/blob/master/iaws.png)
+![alt text](iaws.png)
 
 ## Tools
 
@@ -83,4 +83,7 @@ Create a movie seance where the movie referenced by his is projected in the room
 
 ## Deployment
 
-To start the REST part, launch JlibPdewWdum.api.core.Main, for the soap part launch JlibPdewWdum.soap.Application .  You need to create the database first using ...
+To start the REST part, launch ``JlibPdewWdum.api.core.Main.main()``, for the SOAP part launch ``JlibPdewWdum.soap.Application.main()``.
+
+A sample SQLite production database is provided, you can found it in ``database/bdd.db``.
+For all the test, we are using a test database created at each test.
