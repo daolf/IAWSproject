@@ -25,6 +25,8 @@
 
 ### GET /movie/:id
 
+return the movie with the given omdb id
+
 ### GET /movie/:id/rooms
 
 | Parameter | Required | default value | description                      |
@@ -33,6 +35,10 @@
 | loc       | no       | ``<empty>``   | Localisation of the movie.       |
 | tech      | no       | ``<empty>``   | ex imax                          |
 | a         | no       |  true         | If places are still available    |
+
+### GET /room/:id 
+
+Return the room with the given id
 
 ### GET /rooms
 
