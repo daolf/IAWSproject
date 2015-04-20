@@ -148,8 +148,8 @@ public class RoomMovieDAO extends DAO<RoomMovieModel> {
             System.err.println(rm);
             while (rs.next()) {
                 tmp2 = new RoomMovieModel(roomDAO.find(rs.getInt(1)),
-                        rs.getString(5),
-                        rs.getString(6));
+                        rs.getString(2),
+                        rs.getString(3));
                 tmp.add(tmp2);
             }
             rs.close();

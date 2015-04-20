@@ -41,12 +41,11 @@ public class MovieEndpoint {
                     RoomsResponse.Room room = null;
                     for (RoomMovieModel association : associations) {
                         room = new RoomsResponse.Room();
-                        RoomModel actualRoom = association.getRoom();
                         room.setIdRoom(Integer.toString(association.getRoom().getIdRoom()));
                         if(association.getLocalisation() != null)
-                            room.setLocalisation((association.getLocalisation().getIntitule()).toString());
+                            room.setLocalisation(association.getLocalisation().getIntitule());
                         if(association.getTechno() != null)
-                            room.setTechno((association.getTechno().getIntitule()).toString());
+                            room.setTechno(association.getTechno().getIntitule());
                         response.room.add(room);
                     }
                 }
