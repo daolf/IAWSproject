@@ -8,20 +8,16 @@
 
 package JlibPdewWdum.soap;
 
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
  * <p>Classe Java pour anonymous complex type.
- * 
+ * <p/>
  * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -46,13 +42,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "idOmdb",
-    "room"
+        "idOmdb",
+        "room"
 })
 @XmlRootElement(name = "RoomsResponse")
 public class RoomsResponse {
@@ -64,11 +58,9 @@ public class RoomsResponse {
 
     /**
      * Obtient la valeur de la propriété idOmdb.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getIdOmdb() {
         return idOmdb;
@@ -76,11 +68,9 @@ public class RoomsResponse {
 
     /**
      * Définit la valeur de la propriété idOmdb.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setIdOmdb(String value) {
         this.idOmdb = value;
@@ -88,25 +78,23 @@ public class RoomsResponse {
 
     /**
      * Gets the value of the room property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the room property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getRoom().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
+     * <p/>
+     * <p/>
+     * <p/>
      * Objects of the following type(s) are allowed in the list
      * {@link RoomsResponse.Room }
-     * 
-     * 
      */
     public List<RoomsResponse.Room> getRoom() {
         if (room == null) {
@@ -118,9 +106,9 @@ public class RoomsResponse {
 
     /**
      * <p>Classe Java pour anonymous complex type.
-     * 
+     * <p/>
      * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
-     * 
+     * <p/>
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -134,14 +122,12 @@ public class RoomsResponse {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "idRoom",
-        "techno",
-        "localisation"
+            "idRoom",
+            "techno",
+            "localisation"
     })
     public static class Room {
 
@@ -154,11 +140,9 @@ public class RoomsResponse {
 
         /**
          * Obtient la valeur de la propriété idRoom.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getIdRoom() {
             return idRoom;
@@ -166,11 +150,9 @@ public class RoomsResponse {
 
         /**
          * Définit la valeur de la propriété idRoom.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setIdRoom(String value) {
             this.idRoom = value;
@@ -178,11 +160,9 @@ public class RoomsResponse {
 
         /**
          * Obtient la valeur de la propriété techno.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getTechno() {
             return techno;
@@ -190,11 +170,9 @@ public class RoomsResponse {
 
         /**
          * Définit la valeur de la propriété techno.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setTechno(String value) {
             this.techno = value;
@@ -202,11 +180,9 @@ public class RoomsResponse {
 
         /**
          * Obtient la valeur de la propriété localisation.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getLocalisation() {
             return localisation;
@@ -214,11 +190,9 @@ public class RoomsResponse {
 
         /**
          * Définit la valeur de la propriété localisation.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setLocalisation(String value) {
             this.localisation = value;

@@ -20,9 +20,9 @@ public class RoomMovieModelSerializer extends JsonSerializer<RoomMovieModel> {
     public void serialize(RoomMovieModel o, JsonGenerator jgen, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
         jgen.writeStartObject();
         jgen.writeStringField("room", path + "/room/" + Integer.toString(o.getRoom().getIdRoom()));
-        jgen.writeStringField("movie", path+"/movie/"+o.getMovie());
+        jgen.writeStringField("movie", path + "/movie/" + o.getMovie());
         jgen.writeNumberField("nbPlaceUsed", o.getNbPlaceUsed());
-        jgen.writeStringField("date",o.getDate().toString());
+        jgen.writeStringField("date", o.getDate().toString());
         jgen.writeStringField("localisation", o.getLocalisation().getIntitule());
         jgen.writeStringField("technologie", o.getTechno().getIntitule());
         jgen.writeEndObject();

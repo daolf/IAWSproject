@@ -8,7 +8,7 @@ public class LocalisationModel {
     private int id;
     private String intitule;
 
-    public LocalisationModel(int id,String intitule) {
+    public LocalisationModel(int id, String intitule) {
         this.id = id;
         this.intitule = intitule;
     }

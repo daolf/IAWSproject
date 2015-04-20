@@ -15,16 +15,16 @@ public class RoomDAO extends DAO<RoomModel> {
     @Override
     public boolean create(RoomModel obj) {
         DatabaseManager.updateRequest("INSERT INTO Room VALUES ("
-                                       + obj.getIdRoom() + ","
-                                       + obj.getIdCinema() + ","
-                                       + obj.getNbPlaceRoom() + ");");
+                + obj.getIdRoom() + ","
+                + obj.getIdCinema() + ","
+                + obj.getNbPlaceRoom() + ");");
         return true;
     }
 
     @Override
     public boolean delete(RoomModel obj) {
         DatabaseManager.updateRequest("DELETE FROM Room WHERE idRoom = "
-                                       + obj.getIdRoom() + ";");
+                + obj.getIdRoom() + ";");
         return true;
     }
 
@@ -42,7 +42,7 @@ public class RoomDAO extends DAO<RoomModel> {
             rm = rs.getMetaData();
             rs.next();
             tmp = new RoomModel(rs.getInt(1), rs.getInt(2),
-                                rs.getInt(3));
+                    rs.getInt(3));
             rs.close();
         } catch (SQLException e) {
         }

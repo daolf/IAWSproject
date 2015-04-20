@@ -1,7 +1,6 @@
 package JlibPdewWdum.api.model;
 
 import JlibPdewWdum.api.serializer.RoomModelSerializer;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 /**

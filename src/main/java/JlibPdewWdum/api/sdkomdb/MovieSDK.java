@@ -88,9 +88,7 @@ public class MovieSDK {
             //if error
             if (movie.getNodeName() == "error") {
                 m = null;
-            }
-
-            else {
+            } else {
             /*Normalize year attirbute*/
                 int goodYear = MovieSDK.extractFirstInt(movie.getAttribute("year"));
                 m = new MovieModel(movie.getAttribute("imdbID"),
@@ -127,8 +125,7 @@ public class MovieSDK {
             //if error
             if (movies.item(0).getNodeName() == "error") {
                 m = null;
-            }
-            else {
+            } else {
                 System.out.println("Taille node list :" + movies.getLength());
                 for (int i = 0; i < movies.getLength(); i++) {
                     final Element movie = (Element) movies.item(i);

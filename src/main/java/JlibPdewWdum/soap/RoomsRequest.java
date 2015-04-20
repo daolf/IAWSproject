@@ -8,18 +8,14 @@
 
 package JlibPdewWdum.soap;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Classe Java pour anonymous complex type.
- * 
+ * <p/>
  * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -31,12 +27,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "idOmdb"
+        "idOmdb"
 })
 @XmlRootElement(name = "RoomsRequest")
 public class RoomsRequest {
@@ -46,11 +40,9 @@ public class RoomsRequest {
 
     /**
      * Obtient la valeur de la propriété idOmdb.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getIdOmdb() {
         return idOmdb;
@@ -58,11 +50,9 @@ public class RoomsRequest {
 
     /**
      * Définit la valeur de la propriété idOmdb.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setIdOmdb(String value) {
         this.idOmdb = value;

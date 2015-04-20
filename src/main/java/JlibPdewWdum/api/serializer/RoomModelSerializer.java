@@ -20,7 +20,7 @@ public class RoomModelSerializer extends JsonSerializer<RoomModel> {
     public void serialize(RoomModel o, JsonGenerator jgen, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
         jgen.writeStartObject();
         jgen.writeStringField("idRoom", Integer.toString(o.getIdRoom()));
-        jgen.writeStringField("cinema", path+"/cinema/"+o.getIdCinema());
+        jgen.writeStringField("cinema", path + "/cinema/" + o.getIdCinema());
         jgen.writeNumberField("nbPlace", o.getNbPlaceRoom());
         jgen.writeEndObject();
     }

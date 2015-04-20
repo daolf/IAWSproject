@@ -57,11 +57,12 @@ public class MovieController {
         ObjectMapper mapper = new ObjectMapper();
         try {
             movieModel = MovieSDK.getMovieFromID(id);
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
         if (movieModel != null) {
             RoomMovieDAO roomMovieDAO = new RoomMovieDAO();
             ArrayList<RoomMovieModel> associations = roomMovieDAO.findByMovie(id);
-            if (associations != null && associations.size()!= 0) {
+            if (associations != null && associations.size() != 0) {
 
                 ArrayList<RoomModel> list = new ArrayList<RoomModel>();
                 for (RoomMovieModel association : associations) {

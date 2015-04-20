@@ -71,42 +71,48 @@ public class RoomMovieDAO extends DAO<RoomMovieModel> {
             LocalisationDAO localisationDAO = new LocalisationDAO();
             LocalisationModel localisationModel = localisationDAO.find(rs.getInt(5));
             tmp = new RoomMovieModel(roomModel, movieModel.getIdOmdb(),
-                    rs.getString(4), localisationModel,technoModel );
+                    rs.getString(4), localisationModel, technoModel);
             rs.close();
         } catch (SQLException e) {
         }
         return tmp;
     }
 
-    public ArrayList<RoomMovieModel> findByTechLoc(String tech,String loc) {
-        return findByTechLocNb(tech,loc,-1);
+    public ArrayList<RoomMovieModel> findByTechLoc(String tech, String loc) {
+        return findByTechLocNb(tech, loc, -1);
     }
 
-    public ArrayList<RoomMovieModel> findByTechNb(String tech,int nb) {
-        return findByTechLocNb(tech,"",0);
+    public ArrayList<RoomMovieModel> findByTechNb(String tech, int nb) {
+        return findByTechLocNb(tech, "", 0);
     }
 
-    public ArrayList<RoomMovieModel> findByTechLoc(String loc,int nb) {
-        return findByTechLocNb("",loc,nb);
+    public ArrayList<RoomMovieModel> findByTechLoc(String loc, int nb) {
+        return findByTechLocNb("", loc, nb);
     }
 
     public ArrayList<RoomMovieModel> findByTech(String tech) {
-        return findByTechLocNb(tech,"",-1);
+        return findByTechLocNb(tech, "", -1);
     }
 
     public ArrayList<RoomMovieModel> findByLoc(String loc) {
-        return findByTechLocNb("",loc,-1);
+        return findByTechLocNb("", loc, -1);
     }
 
-    public ArrayList<RoomMovieModel> findByTechLocNb(String tech,String loc,int nb) {
+    public ArrayList<RoomMovieModel> findByTechLocNb(String tech, String loc, int nb) {
         String req = "SELECT * FROM RoomMovieAssociation as R ";
-        if(tech.length() != 0){req += (" INNER JOIN Techno ON (Techno.idTechno = R.idTechno AND Techno.intituleTechno = '" + tech +"')\n");}
-        if(loc .length() != 0){req += (" INNER JOIN Localisation ON (Localisation.idLocalisation = R.idLocalisation AND Localisation.intituleLocalisation = '" + loc +"')\n");}
-        if(nb != -1 ){req += (" INNER JOIN Room ON (Room.idRoom = R.idRoom AND Room.nbPlaceRoom >= " + nb +")\n");}
-        req+=(";");
+        if (tech.length() != 0) {
+            req += (" INNER JOIN Techno ON (Techno.idTechno = R.idTechno AND Techno.intituleTechno = '" + tech + "')\n");
+        }
+        if (loc.length() != 0) {
+            req += (" INNER JOIN Localisation ON (Localisation.idLocalisation = R.idLocalisation AND Localisation.intituleLocalisation = '" + loc + "')\n");
+        }
+        if (nb != -1) {
+            req += (" INNER JOIN Room ON (Room.idRoom = R.idRoom AND Room.nbPlaceRoom >= " + nb + ")\n");
+        }
+        req += (";");
 
         ResultSet rs = DatabaseManager.readRequest(req);
-        ArrayList<RoomMovieModel>tmp = new ArrayList<RoomMovieModel>();
+        ArrayList<RoomMovieModel> tmp = new ArrayList<RoomMovieModel>();
         RoomMovieModel tmp2;
         ResultSetMetaData rm = null;
         TechnoDAO technoDAO = new TechnoDAO();
@@ -116,13 +122,13 @@ public class RoomMovieDAO extends DAO<RoomMovieModel> {
 
         try {
             rm = rs.getMetaData();
-            while (rs.next()){
+            while (rs.next()) {
                 tmp2 = new RoomMovieModel(roomDAO.find(rs.getInt(1)),
-                                            rs.getString(2),
-                                            rs.getInt(3),
-                                            rs.getString(4),
-                                            localisationDAO.find(rs.getInt(5)),
-                                            technoDAO.find(rs.getInt(6))
+                        rs.getString(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        localisationDAO.find(rs.getInt(5)),
+                        technoDAO.find(rs.getInt(6))
                 );
                 tmp.add(tmp2);
             }
@@ -152,7 +158,7 @@ public class RoomMovieDAO extends DAO<RoomMovieModel> {
                         rs.getString(4),
                         localisationDA0.find(rs.getInt(5)),
                         technoDAO.find(rs.getInt(6)));
-                        tmp.add(tmp2);
+                tmp.add(tmp2);
             }
             rs.close();
         } catch (SQLException e) {

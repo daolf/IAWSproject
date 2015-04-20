@@ -1,7 +1,6 @@
 package JlibPdewWdum.api.model;
 
 import JlibPdewWdum.api.serializer.RoomMovieModelSerializer;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import java.sql.Timestamp;
@@ -20,10 +19,10 @@ public class RoomMovieModel {
     private TechnoModel techno;
 
 
-    public RoomMovieModel(RoomModel room, String movie, int nbPlace,String date, LocalisationModel localisation, TechnoModel techno) {
+    public RoomMovieModel(RoomModel room, String movie, int nbPlace, String date, LocalisationModel localisation, TechnoModel techno) {
         this.room = room;
         this.movie = movie;
-        if(date == "")
+        if (date == "")
             this.date = Timestamp.from(Instant.now());
         else
             this.date = Timestamp.from(Instant.ofEpochSecond(Long.valueOf(date)));
@@ -35,7 +34,7 @@ public class RoomMovieModel {
     public RoomMovieModel(RoomModel room, String movie, String date, LocalisationModel localisation, TechnoModel techno) {
         this.room = room;
         this.movie = movie;
-        if(date.length() == 0)
+        if (date.length() == 0)
             this.date = Timestamp.from(Instant.now());
         else
             this.date = Timestamp.from(Instant.ofEpochSecond(Long.valueOf(date)));
@@ -44,12 +43,14 @@ public class RoomMovieModel {
         this.nbPlaceUsed = 0;
     }
 
-    public RoomMovieModel(RoomModel room, String movie, String date){
+    public RoomMovieModel(RoomModel room, String movie, String date) {
         this(room, movie, date, null, null);
     }
+
     public RoomMovieModel(RoomModel room, String movie, String date, LocalisationModel localisation) {
         this(room, movie, date, localisation, null);
     }
+
     public RoomMovieModel(RoomModel room, String movie, String date, TechnoModel techno) {
         this(room, movie, date, null, techno);
     }

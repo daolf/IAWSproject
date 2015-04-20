@@ -1,7 +1,6 @@
 package JlibPdewWdum.api.dao;
 
 import JlibPdewWdum.api.model.LocalisationModel;
-import JlibPdewWdum.api.model.RoomModel;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -10,12 +9,12 @@ import java.sql.SQLException;
 /**
  * Created by daolf on 03/04/15.
  */
-public class LocalisationDAO extends DAO<LocalisationModel>{
+public class LocalisationDAO extends DAO<LocalisationModel> {
     @Override
     public boolean create(LocalisationModel obj) {
         DatabaseManager.updateRequest("INSERT INTO Localisation VALUES ("
                 + obj.getId() + ",'"
-                + obj.getIntitule() +  "');");
+                + obj.getIntitule() + "');");
         return true;
     }
 

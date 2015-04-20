@@ -9,12 +9,12 @@ import java.sql.SQLException;
 /**
  * Created by daolf on 03/04/15.
  */
-public class TechnoDAO extends DAO<TechnoModel>{
+public class TechnoDAO extends DAO<TechnoModel> {
     @Override
     public boolean create(TechnoModel obj) {
         DatabaseManager.updateRequest("INSERT INTO Techno VALUES ("
                 + obj.getId() + ",'"
-                + obj.getIntitule() +  "');");
+                + obj.getIntitule() + "');");
         return true;
     }
 
