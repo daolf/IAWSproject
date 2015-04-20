@@ -149,7 +149,10 @@ public class RoomMovieDAO extends DAO<RoomMovieModel> {
             while (rs.next()) {
                 tmp2 = new RoomMovieModel(roomDAO.find(rs.getInt(1)),
                         rs.getString(2),
-                        rs.getString(3));
+                        rs.getString(3),
+                        //FIXME
+                        new LocalisationModel(1,rs.getString(4)),
+                        new TechnoModel(3,rs.getString(5)));
                 tmp.add(tmp2);
             }
             rs.close();
