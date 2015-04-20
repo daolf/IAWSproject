@@ -6,9 +6,9 @@
 
 ## Technologies utilisés
 ## API RESTFul
-| Endpoint | Description | 
-| ---- | ----------------- | 
-| [GET /movies](#get-movies) | Get list of movies from OMDB API |
+| Endpoint | Description       | 
+| ----     | ----------------- | 
+| [GET /movies](#get-movies)   | Get list of movies from OMDB API |
 | [GET /movie/:id](#get-movieid) | Get movie from OMDB API | 
 | [GET /movie/:id/rooms](#get-movieidrooms) | Get movie from OMDB API | 
 | [GET /rooms](#get-rooms) | Get list of rooms from UGMont service | 
@@ -62,3 +62,7 @@ Return the room with the given id
 | tech      | no       | ``<empty>``   | ex imax     |
 
 Create a movie seance where the movie referenced by his is projected in the room referenced by hid id.
+
+## Deployment
+
+To start the REST part, launch JlibPdewWdum.api.core.Main, for the soap part launch JlibPdewWdum.soap.Application .  You need to create the database first using ...
