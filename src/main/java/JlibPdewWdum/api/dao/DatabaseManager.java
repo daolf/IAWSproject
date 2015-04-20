@@ -19,7 +19,7 @@ public class DatabaseManager {
 
     public static Environment env = Environment.PRODUCTION;
 
-    private static String getDBLocation() {
+    public static String getDBLocation() {
         switch (env) {
             case PRODUCTION:
                 return dbProductionLocation;

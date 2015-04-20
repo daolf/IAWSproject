@@ -20,7 +20,7 @@ public class DatabaseUtils {
 
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:database/test.db");
+            c = DriverManager.getConnection("jdbc:sqlite:"+DatabaseManager.getDBLocation());
 
             ScriptRunner sr = new ScriptRunner(c);
 
