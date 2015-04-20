@@ -3,7 +3,9 @@ package JlibPdewWdum.api.core;
 
 import JlibPdewWdum.api.dao.DatabaseManager;
 import JlibPdewWdum.api.dao.DatabaseUtils;
+import JlibPdewWdum.api.dao.RoomDAO;
 import JlibPdewWdum.api.dao.RoomMovieDAO;
+import JlibPdewWdum.api.model.RoomModel;
 import JlibPdewWdum.api.model.RoomMovieModel;
 import com.sun.jersey.api.representation.Form;
 import junit.framework.Assert;
@@ -88,5 +90,22 @@ public class RoomControllerTest extends JerseyTest {
         form.add("tech", "testTechno0X000003");
         target("/room").path("3").path("movie").request().post(Entity.form(form));
 
+    }
+
+    @Test
+    public void testGetRoomById(){
+
+        String roomWrongParam = target("/room").path("100").request().get(String.class);
+        String roomWrongParamOriginal = "{ \"error\": \"this room does not exist\"}";
+
+        String roomGoodParam = target("/room").path("1").request().get(String.class);
+        String roomGoodParamOriginal = "";
+
+        try {
+            JSONAssert.assertEquals(roomWrongParam, roomWrongParamOriginal, false);
+            JSONAssert.assertEquals(roomGoodParam, roomGoodParamOriginal, false);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
