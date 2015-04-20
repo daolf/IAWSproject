@@ -29,21 +29,49 @@ public class MovieEndpointTest extends TestCase {
     }
 
     @Test
-    public void testgetRooms() {
+    public void testgetRoomsNotNull() {
         // good response
         roomsResponse = movieEndpoint.getRooms(roomsRequestOK);
         assertNotNull("Test request not null (answer)", roomsResponse);
+    }
+
+    @Test
+    public void testgetRoomsId() {
+        // good response
+        roomsResponse = movieEndpoint.getRooms(roomsRequestOK);
         assertEquals("Test good id", roomsResponse.getIdOmdb(), roomsRequestOK.getIdOmdb());
+    }
+
+    @Test
+    public void testgetRoomsSize() {
+        // good response
+        roomsResponse = movieEndpoint.getRooms(roomsRequestOK);
         assertEquals("Test room of roomsResponse size", roomsResponse.room.size(), 1);
+    }
+
+    @Test
+    public void testgetRoomsLocalisation() {
+        // good response
+        roomsResponse = movieEndpoint.getRooms(roomsRequestOK);
         for (RoomsResponse.Room room : roomsResponse.room) {
             assertEquals("Test room localisation ", room.getLocalisation(), "VF");
+        }
+    }
+    @Test
+    public void testgetRoomsTechno() {
+        // good response
+        roomsResponse = movieEndpoint.getRooms(roomsRequestOK);
+        for (RoomsResponse.Room room : roomsResponse.room) {
             assertEquals("Test room technologie ", room.getTechno(), "LEOTECHNOLOGIES");
         }
+    }
 
+    @Test
+    public void testgetRooms() {
         // bad response
         roomsResponse = movieEndpoint.getRooms(roomsRequestKO);
         assertNull("Test request is null ", roomsResponse);
-
-
     }
+
+    //TODO limits cases ?
 }
