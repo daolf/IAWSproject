@@ -31,8 +31,8 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _RoomsResponse_QNAME = new QName("http://JlibPdewWdum/soap/", "RoomsResponse");
-    private final static QName _RoomsRequest_QNAME = new QName("http://JlibPdewWdum/soap/", "RoomsRequest");
+    private final static QName _RoomsResponse_QNAME = new QName("http://JlibPdewWdum/soap", "RoomsResponse");
+    private final static QName _RoomsRequest_QNAME = new QName("http://JlibPdewWdum/soap", "RoomsRequest");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: jlibpdewwdum.soap
@@ -69,7 +69,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link RoomsResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://JlibPdewWdum/soap/", name = "RoomsResponse")
+    @XmlElementDecl(namespace = "http://JlibPdewWdum/soap", name = "RoomsResponse")
     public JAXBElement<RoomsResponse> createRoomsResponse(RoomsResponse value) {
         return new JAXBElement<RoomsResponse>(_RoomsResponse_QNAME, RoomsResponse.class, null, value);
     }
@@ -78,7 +78,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link RoomsRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://JlibPdewWdum/soap/", name = "RoomsRequest")
+    @XmlElementDecl(namespace = "http://JlibPdewWdum/soap", name = "RoomsRequest")
     public JAXBElement<RoomsRequest> createRoomsRequest(RoomsRequest value) {
         return new JAXBElement<RoomsRequest>(_RoomsRequest_QNAME, RoomsRequest.class, null, value);
     }

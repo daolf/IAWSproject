@@ -32,7 +32,7 @@ public class WebServiceConfig extends WsConfigurerAdapter{
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("MoviePort");
         wsdl11Definition.setLocationUri("/soap");
-        wsdl11Definition.setTargetNamespace("http://JlibPdewWdum/soap/");
+        wsdl11Definition.setTargetNamespace("http://JlibPdewWdum/soap");
         wsdl11Definition.setSchema(movieSchema);
         return wsdl11Definition;
     }

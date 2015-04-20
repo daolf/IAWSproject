@@ -19,9 +19,9 @@ import java.util.ArrayList;
 
 @Endpoint
 public class MovieEndpoint {
-    private static final String NAMESPACE_URI = "http://JlibPdewWdum/soap/";
+    private static final String NAMESPACE_URI = "http://JlibPdewWdum/soap";
 
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getRoomsRequest")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "RoomsRequest")
     @ResponsePayload
     public RoomsResponse getRooms(@RequestPayload RoomsRequest request) {
         RoomsResponse response = new RoomsResponse();
