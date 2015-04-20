@@ -1,16 +1,34 @@
-# Projet IAWS - Pierre de Wulf, Wladimir du Manoir, Jules Libert
-## Contexte
-## Architecture globale
+# Projet IAWS - [Pierre de Wulf](https://github.com/daolf), [Wladimir du Manoir](https://github.com/WladimirDuManoir), [Jules Libert](https://github.com/blqke)
+## Context
+
+Project realized for University Toulouse III Paul Sabatier in Interoperability and Web Application course.
+
+## Global architecture
 
 ![alt text](https://github.com/DCLL-MDL/IAWS-JlibPdewWdum-ProjetWS/blob/master/iaws.png)
 
-## Technologies utilisés
+## Tools
+
+|           Use                   | Version                               |
+|  --------------                 |                ---------------        |
+| IDE                             | IntelliJ v13.1.1 or higher            |
+| Test framework                  | Jersey-test version v2.17 for web part and JUnit 4 for all the other                   |
+| SGBDR                           | sqlite                                |
+| Test coverage                   | Plugin coverage 2.0.3-3 (Cobertura)   |
+| JSON library                    | Jackson v1.9.0                        | 
+| VCS                             | Git                                   |
+| Shared Git repository           | Github                                |
+
+
+
+
 ## API RESTFul
 | Endpoint | Description       | 
 | ----     | ----------------- | 
 | [GET /movies](#get-movies)   | Get list of movies from OMDB API |
 | [GET /movie/:id](#get-movieid) | Get movie from OMDB API | 
 | [GET /movie/:id/rooms](#get-movieidrooms) | Get movie from OMDB API | 
+| [GET /room/:id](#get-roomid) | Get room from db | 
 | [GET /rooms](#get-rooms) | Get list of rooms from UGMont service | 
 | [POST /room/:id/movie](#post-roomidmovie) | Get list of rooms from UGMont service | 
 
