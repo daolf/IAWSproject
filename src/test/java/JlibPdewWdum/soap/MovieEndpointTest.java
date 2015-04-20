@@ -89,6 +89,7 @@ public class MovieEndpointTest extends TestCase {
             assertEquals("Test room localisation ", room.getLocalisation(), "VF");
         }
     }
+
     @Test
     public void testgetRoomsTechno() {
         // good response
@@ -102,7 +103,7 @@ public class MovieEndpointTest extends TestCase {
     public void testgetRooms() {
         // bad response
         roomsResponse = movieEndpoint.getRooms(roomsRequestKO);
-        assertNull("Test request is null ", roomsResponse);
+        assertEquals("Test room of roomsResponse size", roomsResponse.room.size(), 0);
     }
 
     //TODO limits cases ?

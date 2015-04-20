@@ -145,10 +145,11 @@ public class RoomMovieDAO extends DAO<RoomMovieModel> {
 
         try {
             rm = rs.getMetaData();
+            System.err.println(rm);
             while (rs.next()) {
                 tmp2 = new RoomMovieModel(roomDAO.find(rs.getInt(1)),
-                        rs.getString(2),
-                        rs.getString(3));
+                        rs.getString(5),
+                        rs.getString(6));
                 tmp.add(tmp2);
             }
             rs.close();
