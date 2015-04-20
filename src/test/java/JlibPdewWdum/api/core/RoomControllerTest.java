@@ -27,7 +27,7 @@ import java.sql.DriverManager;
 
 public class RoomControllerTest extends JerseyTest {
 
-    public static final String path = "http://localhost:8080/myapp";
+    public static final String path = Constants.path;
 
     public void setUp() throws Exception {
         super.setUp();

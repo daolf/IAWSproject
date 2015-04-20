@@ -1,5 +1,6 @@
 package JlibPdewWdum.api.serializer;
 
+import JlibPdewWdum.api.core.Constants;
 import JlibPdewWdum.api.model.RoomModel;
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonProcessingException;
@@ -13,7 +14,7 @@ import java.io.IOException;
  */
 public class RoomModelSerializer extends JsonSerializer<RoomModel> {
 
-    public static final String path = "http://localhost:8080/myapp";
+    public static final String path = Constants.path;
 
     @Override
     public void serialize(RoomModel o, JsonGenerator jgen, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
