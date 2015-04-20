@@ -13,7 +13,7 @@ Project realized for University Toulouse III Paul Sabatier in Interoperability a
 |  --------------                 |                ---------------        |
 | IDE                             | IntelliJ v13.1.1 or higher            |
 | Test framework                  | Jersey-test version v2.17 for web part and JUnit 4 for all the other                   |
-| SGBDR                           | sqlite                                |
+| DMBS                            | sqlite                                |
 | Test coverage                   | Plugin coverage 2.0.3-3 (Cobertura)   |
 | JSON library                    | Jackson v1.9.0                        | 
 | VCS                             | Git                                   |
