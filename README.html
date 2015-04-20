@@ -1037,7 +1037,7 @@ body .markdown-body
 <td>Jersey-test version v2.17 for web part and JUnit 4 for all the other</td>
 </tr>
 <tr>
-<td>SGBDR</td>
+<td>DMBS</td>
 <td>sqlite</td>
 </tr>
 <tr>
@@ -1230,6 +1230,11 @@ body .markdown-body
 </tbody>
 </table>
 <p>Create a movie seance where the movie referenced by his is projected in the room referenced by hid id.</p>
+<h2 id="soap"><a name="user-content-soap" href="#soap" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>SOAP</h2>
+<p>To get the WSDL contract, go to <code>http://localhost:8080/soap/resources/movie.wsdl</code></p>
+<p>To test a sample request, you can found request.xml in project root.<br />
+Then you can see the response with this command </p>
+<p><code>$ curl --header "content-type: text/xml" -d @request.xml http://localhost:8080/soap</code></p>
 <h2 id="deployment"><a name="user-content-deployment" href="#deployment" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Deployment</h2>
 <p>To start the REST part, launch <code>JlibPdewWdum.api.core.Main.main()</code>, for the SOAP part launch <code>JlibPdewWdum.soap.Application.main()</code>.</p>
 <p>A sample SQLite production database is provided, you can found it in <code>database/bdd.db</code>.<br />

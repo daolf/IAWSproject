@@ -81,9 +81,19 @@ Return the room with the given id
 
 Create a movie seance where the movie referenced by his is projected in the room referenced by hid id.
 
+## SOAP
+
+To get the WSDL contract, go to ``http://localhost:8080/soap/resources/movie.wsdl``
+
+To test a sample request, you can found request.xml in project root.
+Then you can see the response with this command 
+
+``$ curl --header "content-type: text/xml" -d @request.xml http://localhost:8080/soap``
+
 ## Deployment
 
 To start the REST part, launch ``JlibPdewWdum.api.core.Main.main()``, for the SOAP part launch ``JlibPdewWdum.soap.Application.main()``.
 
 A sample SQLite production database is provided, you can found it in ``database/bdd.db``.
 For all the test, we are using a test database created at each test.
+
