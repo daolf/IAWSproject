@@ -1,7 +1,5 @@
 package JlibPdewWdum.api.dao;
 
-import java.sql.Connection;
-
 /**
  * Created by jlibert on 01/04/2015.
  */

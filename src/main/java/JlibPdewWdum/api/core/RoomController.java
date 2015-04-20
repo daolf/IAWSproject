@@ -81,33 +81,29 @@ public class RoomController {
             return "Error: Movie ID MISSING.";
         } else { // CHECK IF THIS MOVIE EXIST
             movieModel = MovieSDK.getMovieFromID(idMovie);
-            if(movieModel == null)
+            if (movieModel == null)
                 return "Error: This movie doesn't exists";
         }
 
         LocalisationModel localisationModel = null;
-        if (loc.length() != 0)
-        {
+        if (loc.length() != 0) {
             // CHECK if the location exists in database
             LocalisationDAO localisationDAO = new LocalisationDAO();
             localisationModel = localisationDAO.findByName(loc);
             // if not, create it in database
-            if(localisationModel == null)
-            {
+            if (localisationModel == null) {
                 localisationDAO.create(loc);
                 localisationModel = localisationDAO.findByName(loc);
             }
         }
         TechnoModel technoModel = null;
-        if(tech.length() != 0)
-        {
+        if (tech.length() != 0) {
             // CHECK if the techexists in database
             TechnoDAO technoDAO = new TechnoDAO();
             technoModel = technoDAO.findByIntitule(tech);
 
             // if not, create it in database
-            if(technoModel == null)
-            {
+            if (technoModel == null) {
                 technoDAO.create(tech);
                 technoModel = technoDAO.findByIntitule(tech);
             }
@@ -115,7 +111,7 @@ public class RoomController {
         }
 
         RoomMovieModel roomMovieModel = new RoomMovieModel(room, idMovie, date,
-                                                           localisationModel, technoModel);
+                localisationModel, technoModel);
         RoomMovieDAO dao = new RoomMovieDAO();
         dao.create(roomMovieModel);
         return "Movie \"" + movieModel.getTitle() + "\" successfuly associated with" +

@@ -11,19 +11,19 @@ public class CinemaModelTest extends TestCase {
     @Before
     public void setUp() throws Exception {
         super.setUp();
-        c = new CinemaModel(1,"LIDO","2 rue de pezenas");
+        c = new CinemaModel(1, "LIDO", "2 rue de pezenas");
     }
 
     @Test
-    public void testGetterSetter(){
-        assertEquals("Test getId",1,c.getId());
-        assertEquals("Test getTitle","LIDO",c.getTitle());
-        assertEquals("Test getAdress","2 rue de pezenas",c.getAdress());
+    public void testGetterSetter() {
+        assertEquals("Test getId", 1, c.getId());
+        assertEquals("Test getTitle", "LIDO", c.getTitle());
+        assertEquals("Test getAdress", "2 rue de pezenas", c.getAdress());
         c.setId(2);
         c.setTitle("GAUMONT");
         c.setAdress("LABEGE");
-        assertEquals("Test setId",2,c.getId());
-        assertEquals("Test setTitle","GAUMONT",c.getTitle());
-        assertEquals("Test setAdress","LABEGE",c.getAdress());
+        assertEquals("Test setId", 2, c.getId());
+        assertEquals("Test setTitle", "GAUMONT", c.getTitle());
+        assertEquals("Test setAdress", "LABEGE", c.getAdress());
     }
 }

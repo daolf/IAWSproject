@@ -2,7 +2,6 @@ package JlibPdewWdum.soap;
 
 import JlibPdewWdum.api.dao.RoomMovieDAO;
 import JlibPdewWdum.api.model.MovieModel;
-import JlibPdewWdum.api.model.RoomModel;
 import JlibPdewWdum.api.model.RoomMovieModel;
 import JlibPdewWdum.api.sdkomdb.MovieSDK;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
@@ -11,7 +10,6 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -33,23 +31,24 @@ public class MovieEndpoint {
         String id = request.getIdOmdb();
         try {
             movieModel = MovieSDK.getMovieFromID(id);
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
         if (movieModel != null) {
             RoomMovieDAO roomMovieDAO = new RoomMovieDAO();
             ArrayList<RoomMovieModel> associations = roomMovieDAO.findByMovie(id);
             if (associations != null) {
-                    RoomsResponse.Room room = null;
-                    for (RoomMovieModel association : associations) {
-                        room = new RoomsResponse.Room();
-                        room.setIdRoom(Integer.toString(association.getRoom().getIdRoom()));
-                        if(association.getLocalisation() != null)
-                            room.setLocalisation(association.getLocalisation().getIntitule());
-                        if(association.getTechno() != null)
-                            room.setTechno(association.getTechno().getIntitule());
-                        response.room.add(room);
-                    }
+                RoomsResponse.Room room = null;
+                for (RoomMovieModel association : associations) {
+                    room = new RoomsResponse.Room();
+                    room.setIdRoom(Integer.toString(association.getRoom().getIdRoom()));
+                    if (association.getLocalisation() != null)
+                        room.setLocalisation(association.getLocalisation().getIntitule());
+                    if (association.getTechno() != null)
+                        room.setTechno(association.getTechno().getIntitule());
+                    response.room.add(room);
                 }
             }
+        }
         return response;
     }
 }

@@ -4,7 +4,6 @@ import JlibPdewWdum.api.dao.DatabaseManager;
 import junit.framework.TestCase;
 import org.apache.ibatis.jdbc.ScriptRunner;
 import org.junit.Test;
-import org.springframework.boot.SpringApplication;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

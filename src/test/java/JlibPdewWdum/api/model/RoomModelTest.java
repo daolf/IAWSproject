@@ -8,20 +8,21 @@ public class RoomModelTest extends TestCase {
 
 
     public RoomModel r;
+
     @Before
     public void setUp() {
-        r = new RoomModel(1,2,10);
+        r = new RoomModel(1, 2, 10);
     }
 
     @Test
     public void testGetter() {
-        assertEquals("getIdRoom",1,r.getIdRoom());
-        assertEquals("getIdCinema",2,r.getIdCinema());
-        assertEquals("getNbPlaceRoom",10,r.getNbPlaceRoom());
+        assertEquals("getIdRoom", 1, r.getIdRoom());
+        assertEquals("getIdCinema", 2, r.getIdCinema());
+        assertEquals("getNbPlaceRoom", 10, r.getNbPlaceRoom());
     }
 
     @Test
-    public void testSetter(){
+    public void testSetter() {
         r.setIdRoom(5);
         assertEquals("Setter idRoom", 5, r.getIdRoom());
         r.setIdCinema(10);
