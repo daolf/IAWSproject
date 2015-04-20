@@ -2,16 +2,13 @@
 // Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.7 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2015.04.19 à 06:52:26 PM CEST 
+// Généré le : 2015.04.20 à 10:41:18 AM CEST 
 //
 
 
 package JlibPdewWdum.soap;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
-import javax.xml.namespace.QName;
 
 
 /**
@@ -31,8 +28,6 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _RoomsResponse_QNAME = new QName("http://JlibPdewWdum/soap", "RoomsResponse");
-    private final static QName _RoomsRequest_QNAME = new QName("http://JlibPdewWdum/soap", "RoomsRequest");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: jlibpdewwdum.soap
@@ -50,14 +45,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link RoomsRequest }
-     * 
-     */
-    public RoomsRequest createRoomsRequest() {
-        return new RoomsRequest();
-    }
-
-    /**
      * Create an instance of {@link RoomsResponse.Room }
      * 
      */
@@ -66,21 +53,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link RoomsResponse }{@code >}}
+     * Create an instance of {@link RoomsRequest }
      * 
      */
-    @XmlElementDecl(namespace = "http://JlibPdewWdum/soap", name = "RoomsResponse")
-    public JAXBElement<RoomsResponse> createRoomsResponse(RoomsResponse value) {
-        return new JAXBElement<RoomsResponse>(_RoomsResponse_QNAME, RoomsResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link RoomsRequest }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://JlibPdewWdum/soap", name = "RoomsRequest")
-    public JAXBElement<RoomsRequest> createRoomsRequest(RoomsRequest value) {
-        return new JAXBElement<RoomsRequest>(_RoomsRequest_QNAME, RoomsRequest.class, null, value);
+    public RoomsRequest createRoomsRequest() {
+        return new RoomsRequest();
     }
 
 }

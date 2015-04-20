@@ -11,6 +11,7 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -25,6 +26,7 @@ public class MovieEndpoint {
     @ResponsePayload
     public RoomsResponse getRooms(@RequestPayload RoomsRequest request) {
         RoomsResponse response = new RoomsResponse();
+        response.room = new ArrayList<RoomsResponse.Room>();
         MovieModel movieModel = null;
 
         response.setIdOmdb(request.getIdOmdb());
@@ -36,11 +38,14 @@ public class MovieEndpoint {
             RoomMovieDAO roomMovieDAO = new RoomMovieDAO();
             ArrayList<RoomMovieModel> associations = roomMovieDAO.findByMovie(id);
             if (associations != null) {
-                    RoomsResponse.Room room = new RoomsResponse.Room();
+                    RoomsResponse.Room room = null;
                     for (RoomMovieModel association : associations) {
+                        room = new RoomsResponse.Room();
                         room.setIdRoom(Integer.toString(association.getRoom().getIdRoom()));
-                        room.setLocalisation((association.getLocalisation()).toString());
-                        room.setTechno((association.getTechno()).toString());
+                        if(association.getLocalisation() != null)
+                            room.setLocalisation((association.getLocalisation()).toString());
+                        if(association.getTechno() != null)
+                            room.setTechno((association.getTechno()).toString());
                         response.room.add(room);
                     }
                 }
