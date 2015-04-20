@@ -151,9 +151,9 @@ public class RoomMovieDAO extends DAO<RoomMovieModel> {
             while (rs.next()) {
                 tmp2 = new RoomMovieModel(roomDAO.find(rs.getInt(1)),
                         rs.getString(2),
-                        rs.getString(3),
-                        localisationDA0.find(rs.getInt(4)),
-                        technoDAO.find(rs.getInt(5)));
+                        rs.getString(4),
+                        localisationDA0.find(rs.getInt(5)),
+                        technoDAO.find(rs.getInt(6)));
                         tmp.add(tmp2);
             }
             rs.close();
