@@ -14,9 +14,9 @@ public class DatabaseManager {
     private static final String dbProductionLocation = "database/bdd.db";
     private static final String dbTestLocation = "database/test.db";
 
-    public enum Environment {PRODUCTION, TEST}
+    public enum Environment {PRODUCTION, TEST};
 
-    ;
+
     public static Environment env = Environment.PRODUCTION;
 
     private static String getDBLocation() {
