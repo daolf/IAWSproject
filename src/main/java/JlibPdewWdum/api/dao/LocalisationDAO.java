@@ -48,7 +48,6 @@ public class LocalisationDAO extends DAO<LocalisationModel>{
             tmp = new LocalisationModel(rs.getInt(1), rs.getString(2));
             rs.close();
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return tmp;
     }
@@ -63,7 +62,6 @@ public class LocalisationDAO extends DAO<LocalisationModel>{
             tmp = new LocalisationModel(rs.getInt(1), rs.getString(2));
             rs.close();
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return tmp;
     }

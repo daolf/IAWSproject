@@ -47,7 +47,6 @@ public class TechnoDAO extends DAO<TechnoModel>{
             tmp = new TechnoModel(rs.getInt(1), rs.getString(2));
             rs.close();
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return tmp;
     }
@@ -62,7 +61,6 @@ public class TechnoDAO extends DAO<TechnoModel>{
             tmp = new TechnoModel(rs.getInt(1), rs.getString(2));
             rs.close();
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return tmp;
     }

@@ -74,7 +74,6 @@ public class RoomMovieDAO extends DAO<RoomMovieModel> {
                     rs.getString(4), localisationModel,technoModel );
             rs.close();
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return tmp;
     }
@@ -129,7 +128,6 @@ public class RoomMovieDAO extends DAO<RoomMovieModel> {
             }
             rs.close();
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return tmp;
     }
@@ -153,7 +151,6 @@ public class RoomMovieDAO extends DAO<RoomMovieModel> {
             }
             rs.close();
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return tmp;
     }
